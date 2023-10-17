@@ -1,7 +1,7 @@
-
+import Home from "./Home";
 function App() {
   return (
-    <div>Hello, youtube with MUI</div>
+    <Home/>
   );
 }
 
