@@ -1,9 +1,10 @@
-import { Box, Divider, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
+import { Box, Divider, IconButton, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 import MailIcon from '@mui/icons-material/Mail';
 import { pink } from '@mui/material/colors';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MenuIcon from '@mui/icons-material/Menu';
+import Burger from './Burger';
 
 
 const fullDrawerWidth = 300;
@@ -136,25 +137,12 @@ export default function FullMenu({open,toggleMenu}) {
     
     <Box sx={{position: 'fixed', 
                 top: 0, left:0,
-                width: fullDrawerWidth,
-                backgroundColor:pink[500], zIndex:1100,
+                width: fullDrawerWidth, zIndex:1100,
                 display: open? 'block' : 'none'
             }}>
                 <Box sx={{ml:2}}>
                     <Toolbar sx={{'&.MuiToolbar-root':{height: headerHeight}, ml:2}} disableGutters>
-                        <IconButton
-                            size="large"
-                            edge="start"
-                            color="inherit"
-                            aria-label="menu"
-                            sx={{ mr: 2 }}
-                            onClick={(e) => toggleMenu(e)}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography variant="h6" component="div">
-                            Youtube
-                        </Typography>
+                      <Burger toggleMenu={toggleMenu}/>  
                     </Toolbar>
                     <Box sx={{overflowY:'hidden', height:850, '&:hover':{overflowY:'scroll'}}}>
                         {drawer}

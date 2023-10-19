@@ -10,7 +10,7 @@ export default function MinMenu({open, headerHeight, minDrawerWidth}) {
                       height:700,
                       backgroundColor:red[500], zIndex:1100,
                       display: open ? 'block' : 'none'
-                }}>
+            }}>
 
     </Box>
   )

@@ -1,14 +1,13 @@
-import { AppBar, Box, Container, CssBaseline, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
+import { Box, Container, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import React, { useEffect } from 'react'
 import { red, yellow, pink } from '@mui/material/colors';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-import MenuIcon from '@mui/icons-material/Menu';
-import IconButton from '@mui/material/IconButton';
 import FullMenu from './components/FullMenu';
 import MinMenu from './components/MinMenu';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
+import Header from './components/Header';
 
 const fullDrawerWidth = 300;
 const minDrawerWidth= 100;
@@ -165,29 +164,11 @@ export default function Home() {
     }
     
   }
-  console.log('isLargeScreen=', isLargeScreen);
-  console.log('isLargeMenu=', isLargeMenu);
+
   return (
     <Container maxWidth='false'>
         <Box sx={{position: 'relative'}}>
-            <AppBar sx={{position: 'fixed', top:0, left:0, height: headerHeight, opacity:1}}
-            >
-              <Toolbar sx={{'&.MuiToolbar-root':{height: headerHeight}, ml:1}}>
-                    <IconButton
-                      size="large"
-                      edge="start"
-                      color="inherit"
-                      aria-label="menu"
-                      sx={{ mr: 2 }}
-                      onClick={(e) => toggleMenu(e)}
-                    >
-                      <MenuIcon />
-                    </IconButton>
-                    <Typography variant="h6" component="div">
-                    Youtube
-                    </Typography>
-              </Toolbar>             
-            </AppBar>
+            <Header headerHeight={headerHeight} toggleMenu={toggleMenu}/>
             <FullMenu open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>
             <MinMenu open={!isLargeMenu} headerHeight={headerHeight} minDrawerWidth={minDrawerWidth}></MinMenu>
             <Drawer
