@@ -4,8 +4,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import { pink } from '@mui/material/colors';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
+
 
 const fullDrawerWidth = 300;
 const minDrawerWidth= 100;
@@ -131,17 +130,15 @@ const drawer = (
     </Box>
   );
 
-export default function FullMenu({toggleDrawer, inDrawner}) {
-  const theme = useTheme();
-  const isLessLargeScreen = useMediaQuery(theme.breakpoints.down("lg"));
-  console.log('isLessLargeScreen=', isLessLargeScreen);
+export default function FullMenu({open,toggleMenu}) {
+
   return (
     
     <Box sx={{position: 'fixed', 
                 top: 0, left:0,
                 width: fullDrawerWidth,
                 backgroundColor:pink[500], zIndex:1100,
-                display: inDrawner? 'block': { xs: 'none', lg: 'block'}
+                display: open? 'block' : 'none'
             }}>
                 <Box sx={{ml:2}}>
                     <Toolbar sx={{'&.MuiToolbar-root':{height: headerHeight}, ml:2}} disableGutters>
@@ -151,7 +148,7 @@ export default function FullMenu({toggleDrawer, inDrawner}) {
                             color="inherit"
                             aria-label="menu"
                             sx={{ mr: 2 }}
-                            onClick={(e) => toggleDrawer(e)}
+                            onClick={(e) => toggleMenu(e)}
                         >
                             <MenuIcon/>
                         </IconButton>

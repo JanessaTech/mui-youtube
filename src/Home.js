@@ -1,11 +1,14 @@
 import { AppBar, Box, Container, CssBaseline, Divider, Drawer, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material';
-import React from 'react'
+import React, { useEffect } from 'react'
 import { red, yellow, pink } from '@mui/material/colors';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import IconButton from '@mui/material/IconButton';
 import FullMenu from './components/FullMenu';
+import MinMenu from './components/MinMenu';
+import { useTheme } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 
 const fullDrawerWidth = 300;
 const minDrawerWidth= 100;
@@ -131,22 +134,39 @@ const drawer = (
   );
 
 export default function Home() {
-  const [open, setOpen] = React.useState(true)
 
-  const openDrawer = (e) => {
-    e.preventDefault();
-    setOpen(true)
-  }
+  const theme = useTheme();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+  const [isLargeMenu, setIsLargeMenu] = React.useState(isLargeScreen)
+  const [drawerOpen, setDrawerOpen] = React.useState(false)
+
+  useEffect(() => {
+    setIsLargeMenu(isLargeScreen)
+  }, [isLargeScreen])
+
+
   const closeDrawer = (e) => {
     e.preventDefault();
-    setOpen(false)
+    setDrawerOpen(false)
   }
 
   const toggleDrawer = (e) => {
     e.preventDefault();
-    setOpen(!open)
+    setDrawerOpen(!drawerOpen)
   }
 
+  const toggleMenu = (e) => {
+    e.preventDefault();
+    console.log('toggleMenu')
+    if (isLargeScreen) {
+      setIsLargeMenu(!isLargeMenu)
+    } else {
+      toggleDrawer(e)
+    }
+    
+  }
+  console.log('isLargeScreen=', isLargeScreen);
+  console.log('isLargeMenu=', isLargeMenu);
   return (
     <Container maxWidth='false'>
         <Box sx={{position: 'relative'}}>
@@ -159,7 +179,7 @@ export default function Home() {
                       color="inherit"
                       aria-label="menu"
                       sx={{ mr: 2 }}
-                      onClick={(e) => toggleDrawer(e)}
+                      onClick={(e) => toggleMenu(e)}
                     >
                       <MenuIcon />
                     </IconButton>
@@ -168,33 +188,25 @@ export default function Home() {
                     </Typography>
               </Toolbar>             
             </AppBar>
-            <FullMenu toggleDrawer={toggleDrawer} inDrawner={false}></FullMenu>
-            <Box sx={{position: 'fixed',
-                      top: headerHeight, left:24,
-                      width: minDrawerWidth,
-                      height:700,
-                      backgroundColor:red[500], zIndex:1100,
-                      display: { xs: 'none', md: 'block', lg: 'none' }
-                }}>
-
-            </Box>
+            <FullMenu open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>
+            <MinMenu open={!isLargeMenu} headerHeight={headerHeight} minDrawerWidth={minDrawerWidth}></MinMenu>
             <Drawer
                     sx={{'& .MuiDrawer-paper': { boxSizing: 'border-box', width: fullDrawerWidth }}}
-                    open={open}
+                    open={drawerOpen}
                     anchor="left"
                     onClose={closeDrawer}
                 >
-                    <FullMenu toggleDrawer={toggleDrawer} inDrawner={true}></FullMenu>
+                    <FullMenu open={true} toggleMenu={toggleMenu}></FullMenu>
             </Drawer>
                 
             
             <Box component='main'
                 sx={{
-                    width: { lg: `calc(100% - ${fullDrawerWidth}px)`,  md:  `calc(100% - ${minDrawerWidth}px)`, sm: 1},
+                    width: isLargeMenu ? `calc(100% - ${fullDrawerWidth}px)` : `calc(100% - ${minDrawerWidth}px - 24px)`,
                     backgroundColor:yellow[500],
                     position: 'absolute',
                     top: headerHeight,
-                    left: {lg: fullDrawerWidth, md: minDrawerWidth, sm: 0},
+                    left: isLargeMenu ? fullDrawerWidth : minDrawerWidth + 24,
                 }}
             >
                 <Typography paragraph>
