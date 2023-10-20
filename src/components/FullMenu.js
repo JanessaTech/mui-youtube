@@ -1,23 +1,17 @@
-import { Box, Divider, IconButton, Link, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
+import { Box, Divider, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material'
 import React from 'react'
 import MailIcon from '@mui/icons-material/Mail';
-import { pink } from '@mui/material/colors';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MenuIcon from '@mui/icons-material/Menu';
 import Burger from './Burger';
-
-
-const fullDrawerWidth = 300;
-const minDrawerWidth= 100;
-const headerHeight = 80
-
+import {fullDrawerWidth, headerHeight} from '../common/Constants'
+import {MenuList} from '../customization/MenuList'
 
 const drawer = (
     <Box sx={{width:260}}>
-      <List >
+      <MenuList >
         {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton disableRipple>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
@@ -25,25 +19,23 @@ const drawer = (
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </MenuList>
       <Divider />
-      <List >
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
+      <MenuList>
+        <ListItem key='001' disablePadding>
+            <ListItemButton disableRipple>
               <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                <MailIcon />
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={'Library'} />
             </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+        </ListItem>
+      </MenuList>
       <Divider />
-      <List>
+      <MenuList>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton disableRipple >
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
@@ -51,12 +43,12 @@ const drawer = (
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </MenuList>
       <Divider />
-      <List>
+      <MenuList>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton disableRipple>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
@@ -64,12 +56,12 @@ const drawer = (
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </MenuList>
       <Divider />
-      <List>
+      <MenuList>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton disableRipple>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
@@ -77,12 +69,12 @@ const drawer = (
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </MenuList>
       <Divider />
-      <List>
+      <MenuList>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton disableRipple>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
@@ -90,12 +82,12 @@ const drawer = (
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </MenuList>
       <Divider />
-      <List>
+      <MenuList>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton disableRipple>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
@@ -103,11 +95,12 @@ const drawer = (
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
-      <List>
+      </MenuList>
+      <Divider />
+      <MenuList>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton disableRipple>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
@@ -115,11 +108,11 @@ const drawer = (
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
-      <List>
+      </MenuList>
+      <MenuList>
         {['All mail', 'Trash', 'Spam'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
+            <ListItemButton disableRipple>
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
@@ -127,7 +120,19 @@ const drawer = (
             </ListItemButton>
           </ListItem>
         ))}
-      </List>
+      </MenuList>
+      <MenuList>
+        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+          <ListItem key={text} disablePadding>
+            <ListItemButton disableRipple>
+              <ListItemIcon>
+                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+              </ListItemIcon>
+              <ListItemText primary={text} />
+            </ListItemButton>
+          </ListItem>
+        ))}
+      </MenuList>
     </Box>
   );
 
