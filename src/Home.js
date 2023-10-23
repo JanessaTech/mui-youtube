@@ -45,15 +45,15 @@ export default function Home() {
     <Container maxWidth='false'>
         <Box sx={{position: 'relative'}}>
             <Header toggleMenu={toggleMenu}/>
-            <FullMenu open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>
-            <MinMenu open={!isLargeMenu}></MinMenu>
+            <FullMenu isHome={true} open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>
+            <MinMenu isHome={true} open={!isLargeMenu}></MinMenu>
             <Drawer
                     sx={{'& .MuiDrawer-paper': { boxSizing: 'border-box', width: fullDrawerWidth }}}
                     open={drawerOpen}
                     anchor="left"
                     onClose={closeDrawer}
                 >
-                    <FullMenu open={true} toggleMenu={toggleMenu}></FullMenu>
+                    <FullMenu isHome={true} open={true} toggleMenu={toggleMenu}></FullMenu>
             </Drawer>
                 
             
