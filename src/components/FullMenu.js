@@ -1,4 +1,4 @@
-import { Avatar, Box, Collapse, Divider, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
+import { Avatar, Box, Collapse, Divider, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 import MailIcon from '@mui/icons-material/Mail';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
@@ -83,6 +83,7 @@ export default function FullMenu({isHome, open,toggleMenu}) {
       </MenuList>
       <Divider />
       <MenuList>
+        <ListSubheader sx={{backgroundColor:'#f3f2f2', fontSize:'1.2em', color: '#4b4b4b'}}>Subscriptions</ListSubheader>
         {new Array(5).fill('Janessa Tech').map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton disableRipple >
@@ -143,10 +144,10 @@ export default function FullMenu({isHome, open,toggleMenu}) {
                 display: open? 'block' : 'none'
             }}>
                 <Box sx={{ml:2}}>
-                    <Toolbar sx={{'&.MuiToolbar-root':{height: headerHeight}, ml:2}} disableGutters>
+                    <Toolbar sx={{'&.MuiToolbar-root':{height: headerHeight}, ml:1}} disableGutters>
                       <Burger toggleMenu={toggleMenu}/>  
                     </Toolbar>
-                    <Box sx={{overflowY:'hidden', height:850, '&:hover':{overflowY:'scroll'}}}>
+                    <Box sx={{overflowY:'hidden', height:'90vh', '&:hover':{overflowY:'scroll'}}}>
                         {drawer}
                     </Box>
                 </Box>

@@ -7,7 +7,7 @@ export default function Burger({toggleMenu}) {
     <Box>
         <IconButton
             aria-label="burger"
-            sx={{ mr: 2, '& svg': {fontSize: 40}, verticalAlign:'top' }}
+            sx={{ mr: 2, '& svg': {fontSize: 40}, verticalAlign:'top'}}
             onClick={(e) => toggleMenu(e)}
         >
             <MenuIcon/>
