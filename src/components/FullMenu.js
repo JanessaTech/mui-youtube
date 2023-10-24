@@ -10,7 +10,7 @@ function capitalize(s)
     return s[0].toUpperCase() + s.slice(1);
 }
 
-export default function FullMenu({isHome, open,toggleMenu}) {
+export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
   const [showLibMore, setShowLibMore] = React.useState(true)
   const [showSubMore, setShowSubMore] = React.useState(true)
 
@@ -142,7 +142,7 @@ export default function FullMenu({isHome, open,toggleMenu}) {
             }}>
                 <Box sx={{ml:2}}>
                     <Toolbar sx={{'&.MuiToolbar-root':{height: headerHeight}, ml:1}} disableGutters>
-                      <Burger toggleMenu={toggleMenu}/>  
+                      <Burger toggleMenu={toggleMenu} isInDrawer={isInDrawer}/>  
                     </Toolbar>
                     <Box sx={{overflowY:'hidden', height:'90vh', '&:hover':{overflowY:'scroll'}}}>
                         {drawer}

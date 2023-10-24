@@ -2,7 +2,7 @@ import { Box, IconButton, Link } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import React from 'react'
 
-export default function Burger({toggleMenu}) {
+export default function Burger({toggleMenu, isInDrawer}) {
   return (
     <Box sx={{display:'flex'}}>
         <IconButton
@@ -12,7 +12,7 @@ export default function Burger({toggleMenu}) {
         >
             <MenuIcon/>
         </IconButton>
-        <Link href="/" sx={{display:{xs: 'none', sm:'block' }}}>
+        <Link href="/" sx={{display: isInDrawer? 'block' : {xs: 'none', sm:'block' }}}>
             <img src="imgs/logo1.png" height="50"/>
         </Link>
     </Box>

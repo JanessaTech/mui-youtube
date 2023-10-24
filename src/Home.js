@@ -57,7 +57,7 @@ export default function Home() {
                     anchor="left"
                     onClose={closeDrawer}
                 >
-                    <FullMenu isHome={true} open={true} toggleMenu={toggleMenu}></FullMenu>
+                    <FullMenu isHome={true} open={true} toggleMenu={toggleMenu} isInDrawer={true}></FullMenu>
             </Drawer>
                 
             
