@@ -1,8 +1,5 @@
 import { Avatar, Box, Collapse, Divider, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Toolbar, Typography } from '@mui/material'
 import React from 'react'
-import MailIcon from '@mui/icons-material/Mail';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Burger from './Burger';
 import {fullDrawerWidth, headerHeight} from '../common/Constants'
 import {MenuList} from '../customization/MenuList'
@@ -52,7 +49,7 @@ export default function FullMenu({isHome, open,toggleMenu}) {
             </ListItemButton>
           </ListItem>
         ))}
-        <ListItem sx={{display: showLibMore? 'block': 'none'}} key={'show more'} disablePadding>
+        <ListItem sx={{display: showLibMore? 'block': 'none'}} key={'show more lib'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowLibMore}>
             <ListItemIcon>
               <MenuIcon name={'more'}/>
@@ -72,7 +69,7 @@ export default function FullMenu({isHome, open,toggleMenu}) {
             </ListItem>
           ))}
         </Collapse>
-        <ListItem sx={{display: !showLibMore ? 'block': 'none'}} key={'show less'} disablePadding>
+        <ListItem sx={{display: !showLibMore ? 'block': 'none'}} key={'show less lib'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowLibMore}>
             <ListItemIcon>
               <MenuIcon name={'less'}/>
@@ -85,16 +82,16 @@ export default function FullMenu({isHome, open,toggleMenu}) {
       <MenuList>
         <ListSubheader sx={{backgroundColor:'#f3f2f2', fontSize:'1.2em', color: '#4b4b4b'}}>Subscriptions</ListSubheader>
         {new Array(5).fill('Janessa Tech').map((text, index) => (
-          <ListItem key={text} disablePadding>
+          <ListItem key={index} disablePadding>
             <ListItemButton disableRipple >
               <ListItemAvatar>
                 <Avatar sx={{ width: 35, height: 35 }} alt="Janessa Tech" src="imgs/prof.png" />
               </ListItemAvatar>
-              <ListItemText primary={text} />
+              <ListItemText key={index} primary={text} />
             </ListItemButton>
           </ListItem>
         ))}
-        <ListItem sx={{display: showSubMore? 'block': 'none'}} key={'show more'} disablePadding>
+        <ListItem sx={{display: showSubMore? 'block': 'none'}} key={'show more sub'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowSubMore}>
             <ListItemIcon>
               <MenuIcon name={'more'}/>
@@ -114,7 +111,7 @@ export default function FullMenu({isHome, open,toggleMenu}) {
               </ListItem>
             ))}
         </Collapse>
-        <ListItem sx={{display: !showSubMore? 'block': 'none'}} key={'show more'} disablePadding>
+        <ListItem sx={{display: !showSubMore? 'block': 'none'}} key={'show less sub'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowSubMore}>
             <ListItemIcon>
               <MenuIcon name={'less'}/>

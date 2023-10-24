@@ -12,12 +12,17 @@ export default function Home() {
 
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [isLargeMenu, setIsLargeMenu] = React.useState(isLargeScreen)
+  const [isSmallMemu, setIsSmallMemu] = React.useState(isSmallScreen)
   const [drawerOpen, setDrawerOpen] = React.useState(false)
 
   useEffect(() => {
     setIsLargeMenu(isLargeScreen)
   }, [isLargeScreen])
+  useEffect(() => {
+    setIsSmallMemu(isSmallScreen)
+  }, [isSmallScreen])
 
 
   const closeDrawer = (e) => {
@@ -40,13 +45,15 @@ export default function Home() {
     }
     
   }
-
+ 
   return (
+    
     <Container maxWidth='false'>
+      { console.log('isLargeMenu=', isLargeMenu)}
         <Box sx={{position: 'relative'}}>
             <Header toggleMenu={toggleMenu}/>
             <FullMenu isHome={true} open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>
-            <MinMenu isHome={true} open={!isLargeMenu}></MinMenu>
+            <MinMenu isHome={true} open={!isLargeMenu && !isSmallMemu}></MinMenu>
             <Drawer
                     sx={{'& .MuiDrawer-paper': { boxSizing: 'border-box', width: fullDrawerWidth }}}
                     open={drawerOpen}
@@ -59,11 +66,11 @@ export default function Home() {
             
             <Box component='main'
                 sx={{
-                    width: isLargeMenu ? `calc(100% - ${fullDrawerWidth}px)` : `calc(100% - ${minDrawerWidth}px - 24px)`,
+                    width: { xs: 1, sm: `calc(100% - ${minDrawerWidth}px - 24px)`, lg: isLargeMenu ? `calc(100% - ${fullDrawerWidth}px)`: `calc(100% - ${minDrawerWidth}px - 24px)`},
                     backgroundColor:yellow[500],
                     position: 'absolute',
                     top: headerHeight,
-                    left: isLargeMenu ? fullDrawerWidth : minDrawerWidth + 24,
+                    left: {xs: 0, sm: minDrawerWidth + 24, lg: isLargeMenu ? fullDrawerWidth : minDrawerWidth + 24},
                 }}
             >
                 <Typography paragraph>
