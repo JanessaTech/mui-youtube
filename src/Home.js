@@ -37,19 +37,16 @@ export default function Home() {
 
   const toggleMenu = (e) => {
     e.preventDefault();
-    console.log('toggleMenu')
     if (isLargeScreen) {
       setIsLargeMenu(!isLargeMenu)
     } else {
       toggleDrawer(e)
     }
-    
   }
  
   return (
     
     <Container maxWidth='false'>
-      { console.log('isLargeMenu=', isLargeMenu)}
         <Box sx={{position: 'relative'}}>
             <Header toggleMenu={toggleMenu}/>
             <FullMenu isHome={true} open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>

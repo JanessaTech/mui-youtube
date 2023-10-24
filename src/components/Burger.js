@@ -4,15 +4,15 @@ import React from 'react'
 
 export default function Burger({toggleMenu}) {
   return (
-    <Box>
+    <Box sx={{display:'flex'}}>
         <IconButton
             aria-label="burger"
-            sx={{ mr: 2, '& svg': {fontSize: 40}, verticalAlign:'top'}}
+            sx={{'& svg': {fontSize: 40}}}
             onClick={(e) => toggleMenu(e)}
         >
             <MenuIcon/>
         </IconButton>
-        <Link href="/">
+        <Link href="/" sx={{display:{xs: 'none', sm:'block' }}}>
             <img src="imgs/logo1.png" height="50"/>
         </Link>
     </Box>

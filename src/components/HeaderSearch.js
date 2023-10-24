@@ -4,7 +4,7 @@ import React from 'react'
 
 export default function HeaderSearch() {
   return (
-    <Box sx={{width:'50%', height:1, backgroundColor:'red'}}>
+    <Box sx={{width:0.6, height:1, backgroundColor:'#c8c8c8'}}>
 
     </Box>
   )

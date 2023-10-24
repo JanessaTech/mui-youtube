@@ -10,7 +10,10 @@ const svgMapping = new Map([
   ['your videos', 'imgs/video.svg'],
   ['watch later', 'imgs/watch.svg'],
   ['more', 'imgs/arrow-down.svg'],
-  ['less', 'imgs/arrow-up.svg']
+  ['less', 'imgs/arrow-up.svg'],
+  ['create', 'imgs/video-plus.svg'],
+  ['notification', 'imgs/togzhi.svg'],
+  
 ])
 
 function generateIcon(src) {
