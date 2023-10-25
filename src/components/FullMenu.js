@@ -1,9 +1,9 @@
-import { Avatar, Box, Collapse, Divider, List, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Toolbar, Typography } from '@mui/material'
+import { Avatar, Box, Collapse, Divider, ListItem, ListItemAvatar, ListItemButton, ListItemIcon, ListItemText, ListSubheader, Toolbar, Typography } from '@mui/material'
 import React from 'react'
 import Burger from './Burger';
 import {fullDrawerWidth, headerHeight} from '../common/Constants'
 import {MenuList} from '../customization/MenuList'
-import {MenuIcon} from '../customization/Svgs'
+import {YoutubeIcon} from '../customization/Svgs'
 
 function capitalize(s)
 {
@@ -30,7 +30,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
           <ListItem key={text} disablePadding>
             <ListItemButton disableRipple selected={isHome ? text === 'home' : false}>
               <ListItemIcon>
-                <MenuIcon name={text}/>
+                <YoutubeIcon name={text}/>
               </ListItemIcon>
               <ListItemText primary={capitalize(text)} />
             </ListItemButton>
@@ -43,7 +43,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
           <ListItem key={text} disablePadding>
             <ListItemButton disableRipple>
               <ListItemIcon>
-                <MenuIcon name={text}/>
+                <YoutubeIcon name={text}/>
               </ListItemIcon>
               <ListItemText primary={capitalize(text)} />
             </ListItemButton>
@@ -52,7 +52,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <ListItem sx={{display: showLibMore? 'block': 'none'}} key={'show more lib'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowLibMore}>
             <ListItemIcon>
-              <MenuIcon name={'more'}/>
+              <YoutubeIcon name={'more'}/>
             </ListItemIcon>
             <ListItemText primary={capitalize('show more')} />
           </ListItemButton>
@@ -62,7 +62,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
             <ListItem key={text} disablePadding>
               <ListItemButton disableRipple>
                 <ListItemIcon>
-                  <MenuIcon name={text}/>
+                  <YoutubeIcon name={text}/>
                 </ListItemIcon>
                 <ListItemText primary={capitalize(text)} />
               </ListItemButton>
@@ -72,7 +72,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <ListItem sx={{display: !showLibMore ? 'block': 'none'}} key={'show less lib'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowLibMore}>
             <ListItemIcon>
-              <MenuIcon name={'less'}/>
+              <YoutubeIcon name={'less'}/>
             </ListItemIcon>
             <ListItemText primary={capitalize('show less')} />
           </ListItemButton>
@@ -94,7 +94,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <ListItem sx={{display: showSubMore? 'block': 'none'}} key={'show more sub'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowSubMore}>
             <ListItemIcon>
-              <MenuIcon name={'more'}/>
+              <YoutubeIcon name={'more'}/>
             </ListItemIcon>
             <ListItemText primary={capitalize('show more')} />
           </ListItemButton>
@@ -114,7 +114,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <ListItem sx={{display: !showSubMore? 'block': 'none'}} key={'show less sub'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowSubMore}>
             <ListItemIcon>
-              <MenuIcon name={'less'}/>
+              <YoutubeIcon name={'less'}/>
             </ListItemIcon>
             <ListItemText primary={capitalize('show less')} />
           </ListItemButton>

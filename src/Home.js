@@ -48,7 +48,7 @@ export default function Home() {
     
     <Container maxWidth='false'>
         <Box sx={{position: 'relative'}}>
-            <Header toggleMenu={toggleMenu}/>
+            <Header toggleMenu={toggleMenu} isLargeScreen={isLargeScreen}/>
             <FullMenu isHome={true} open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>
             <MinMenu isHome={true} open={!isLargeMenu && !isSmallMemu}></MinMenu>
             <Drawer

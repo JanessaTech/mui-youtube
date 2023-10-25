@@ -13,6 +13,9 @@ const svgMapping = new Map([
   ['less', 'imgs/arrow-up.svg'],
   ['create', 'imgs/video-plus.svg'],
   ['notification', 'imgs/togzhi.svg'],
+  ['search', 'imgs/len.svg'],
+  ['voice_search','imgs/speaker.svg']
+
   
 ])
 
@@ -24,4 +27,4 @@ function generateIcon(src) {
   )
 }
 
-export function MenuIcon({name}) {return (generateIcon(svgMapping.get(name) || 'imgs/bookmarker.svg'))}
+export function YoutubeIcon({name}) {return (generateIcon(svgMapping.get(name) || 'imgs/bookmarker.svg'))}
