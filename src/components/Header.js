@@ -11,7 +11,7 @@ export default function Header({toggleMenu, isLargeScreen}) {
             >
               <Toolbar sx={{'&.MuiToolbar-root':{height: headerHeight}, justifyContent: 'space-between'}}>
                     <Burger toggleMenu={toggleMenu}/>
-                    <Box sx={{height:56, display:'flex', width: 0.8, ml:2, flex: '1 1 200', justifyContent: 'space-between'}}>
+                    <Box sx={{height:56, display:'flex', width: 0.8, ml:2, justifyContent: 'space-between'}}>
                       <HeaderSearch isLargeScreen={isLargeScreen}/>
                       <HeaderOthers/>
                     </Box>

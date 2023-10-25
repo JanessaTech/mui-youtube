@@ -3,23 +3,28 @@ import { Box, IconButton, InputAdornment, TextField } from '@mui/material'
 import React from 'react'
 import { YoutubeIcon } from '../customization/Svgs'
 import { useTheme } from '@mui/material/styles';
+import HeaderSearchHis from './HeaderSearchHis';
 
 export default function HeaderSearch({isLargeScreen}) {
-  const theme = useTheme();
+  const theme = useTheme()
+  const [showHis, setShowHis] = React.useState(false)
+
   const handleFocus = (e) => {
     e.preventDefault()
+    setShowHis(true)
   }
   const handleBlur = (e) => {
     e.preventDefault()
+    setShowHis(false)
 
   }
   return (
     <Box sx={{width:0.7, height:1}}>
-      <Box sx={{display:'flex'}} component='form' noValidate autoComplete='off'>
+      <Box sx={{display:'flex', position:'relative'}} component='form' noValidate autoComplete='off'>
         <TextField sx={{
               '& .MuiOutlinedInput-root':{
                     'fieldset' : {borderRadius:'28px 0 0 28px'},
-                    '&.Mui-focused fieldset': {borderColor:'primary'},
+                    '&.Mui-focused fieldset': {borderColor:'primary.main'},
                     
 
                   },
@@ -39,6 +44,7 @@ export default function HeaderSearch({isLargeScreen}) {
           onFocus={handleFocus}
           onBlur={handleBlur}
         />
+        <HeaderSearchHis isShow={showHis}/>
         <Box sx={{ 
                   backgroundColor:'action.hover', 
                   px:1,
