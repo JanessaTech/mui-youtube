@@ -1,5 +1,5 @@
 
-import { Box, IconButton, InputAdornment, TextField } from '@mui/material'
+import { Box, IconButton, InputAdornment, TextField, Tooltip } from '@mui/material'
 import React from 'react'
 import { YoutubeIcon } from '../customization/Svgs'
 import { useTheme } from '@mui/material/styles';
@@ -37,6 +37,13 @@ export default function HeaderSearch({isLargeScreen}) {
     setSearch('')
     setShowHis(true)
   }
+
+  const setKeyword = (key) => {
+    setSearch(key)
+    setShowHis(false)
+    setClear(true)
+  }
+
   return (
     <Box sx={{width:0.7, height:1}}>
       <Box sx={{display:'flex', position:'relative'}} component='form' noValidate autoComplete='off'>
@@ -72,7 +79,7 @@ export default function HeaderSearch({isLargeScreen}) {
           onBlur={handleBlur}
           onChange={handleChanges}
         />
-        <HeaderSearchHis isShow={showHis}/>
+        <HeaderSearchHis isShow={showHis} setKeyword={setKeyword}/>
         
         <Box sx={{ 
                   backgroundColor:'action.hover', 
@@ -84,16 +91,20 @@ export default function HeaderSearch({isLargeScreen}) {
                   '&:active':{backgroundColor:'action.focus'}
                   }}
         >
-           <IconButton sx={{'&.MuiButtonBase-root':{p:'12px'}}} 
-                    aria-label="search" disableRipple>
-              <YoutubeIcon name={'search'}/>
-            </IconButton>
+          <Tooltip title="Search">
+              <IconButton sx={{'&.MuiButtonBase-root':{p:'12px'}}} 
+                      aria-label="search" disableRipple>
+                <YoutubeIcon name={'search'}/>
+              </IconButton>
+          </Tooltip>          
+           
         </Box>
-        <IconButton sx={{'&.MuiButtonBase-root':{p:'13px'}, ml:2, [theme.breakpoints.down('sm')]:{display:'none'}}} 
-                    aria-label="voice_search">
-              <YoutubeIcon name={'voice_search'}/>
-        </IconButton>
-       
+        <Tooltip title="Search with your voice">
+          <IconButton sx={{'&.MuiButtonBase-root':{p:'13px'}, ml:2, [theme.breakpoints.down('sm')]:{display:'none'}}} 
+                      aria-label="voice_search">
+                <YoutubeIcon name={'voice_search'}/>
+          </IconButton>
+        </Tooltip>
       </Box>
     </Box>
   )
