@@ -17,7 +17,9 @@ export default function HeaderSearch({isLargeScreen}) {
   }
   const handleBlur = (e) => {
     e.preventDefault()
-    setShowHis(false)
+    console.log('handleBlur')
+    //setShowHis(false)
+    console.log(e.target)
 
   }
   const handleChanges = (e) => {

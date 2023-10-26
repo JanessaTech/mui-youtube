@@ -17,12 +17,12 @@ export default function HeaderSearchHis({isShow, setKeyword}) {
     }
 
     const handleClick = (e, key) => {
+      console.log('handleClick = ', key)
       e.preventDefault()
       setKeyword(key)
     }
 
   return (
-   
     <Box sx={{
                 boxShadow: shadows[10],
                 width:1, backgroundColor: theme.palette.background.paper,
@@ -34,7 +34,8 @@ export default function HeaderSearchHis({isShow, setKeyword}) {
                 color: 'black'
             }}>
         <List>
-        {mockHist.map((text, index) => (
+        {
+        mockHist.map((text, index) => (
           <ListItem key={index} disablePadding
               secondaryAction={
                 <Tooltip title="Delete">
