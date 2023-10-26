@@ -14,7 +14,9 @@ const svgMapping = new Map([
   ['create', 'imgs/video-plus.svg'],
   ['notification', 'imgs/togzhi.svg'],
   ['search', 'imgs/len.svg'],
-  ['voice_search','imgs/speaker.svg']
+  ['voice_search','imgs/speaker.svg'],
+  ['close', 'imgs/close.svg'],
+  ['hist', 'imgs/his.svg']
 
   
 ])

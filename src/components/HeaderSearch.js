@@ -8,6 +8,8 @@ import HeaderSearchHis from './HeaderSearchHis';
 export default function HeaderSearch({isLargeScreen}) {
   const theme = useTheme()
   const [showHis, setShowHis] = React.useState(false)
+  const [search, setSearch] = React.useState('')
+  const [clear, setClear] =  React.useState(false)
 
   const handleFocus = (e) => {
     e.preventDefault()
@@ -17,6 +19,23 @@ export default function HeaderSearch({isLargeScreen}) {
     e.preventDefault()
     setShowHis(false)
 
+  }
+  const handleChanges = (e) => {
+    e.preventDefault()
+    setSearch(e.target.value)
+    if (e.target.value && e.target.value.length > 0) {
+      setClear(true)
+      setShowHis(false)
+    } else {
+      setClear(false)
+      setShowHis(true)
+    }
+  }
+  const handleClear = (e) => {
+    e.preventDefault()
+    setClear(false)
+    setSearch('')
+    setShowHis(true)
   }
   return (
     <Box sx={{width:0.7, height:1}}>
@@ -31,6 +50,7 @@ export default function HeaderSearch({isLargeScreen}) {
               '& .MuiInputBase-adornedStart' :{pl: 2}
               }}
           id="outlined-basic" 
+          value={search}
           variant="outlined" 
           placeholder='Search'
           fullWidth
@@ -39,12 +59,21 @@ export default function HeaderSearch({isLargeScreen}) {
               <InputAdornment sx={{display: isLargeScreen ? 'flex' : 'none'}} position="start">
                 <YoutubeIcon name={'search'}/>
               </InputAdornment>
+            ),
+            endAdornment:(
+              <InputAdornment sx={{display: clear ? 'flex': 'none'}} position="end">
+                <IconButton onClick={handleClear}>
+                  <YoutubeIcon name={'close'}/>
+                </IconButton> 
+              </InputAdornment>
             )
           }}
           onFocus={handleFocus}
           onBlur={handleBlur}
+          onChange={handleChanges}
         />
         <HeaderSearchHis isShow={showHis}/>
+        
         <Box sx={{ 
                   backgroundColor:'action.hover', 
                   px:1,
