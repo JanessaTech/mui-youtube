@@ -4,23 +4,32 @@ import React from 'react'
 import { YoutubeIcon } from '../customization/Svgs'
 import { useTheme } from '@mui/material/styles';
 import HeaderSearchHis from './HeaderSearchHis';
+import { useRef, useEffect } from 'react';
 
 export default function HeaderSearch({isLargeScreen}) {
   const theme = useTheme()
   const [showHis, setShowHis] = React.useState(false)
   const [search, setSearch] = React.useState('')
   const [clear, setClear] =  React.useState(false)
+  const ref = useRef(null)
+  const histRef = useRef(null)
+  useEffect(() => {
+    const handleOutSideClick = (event) => {
+      if (!histRef.current?.contains(event.target)) {
+        //  click outside of hist when hist popup is shown
+        setShowHis(false)
+      }
+    };
+
+    window.addEventListener("mousedown", handleOutSideClick);
+    return () => {
+      window.removeEventListener("mousedown", handleOutSideClick);
+    };
+  }, [histRef]);
 
   const handleFocus = (e) => {
     e.preventDefault()
     setShowHis(true)
-  }
-  const handleBlur = (e) => {
-    e.preventDefault()
-    console.log('handleBlur')
-    //setShowHis(false)
-    console.log(e.target)
-
   }
   const handleChanges = (e) => {
     e.preventDefault()
@@ -78,10 +87,10 @@ export default function HeaderSearch({isLargeScreen}) {
             )
           }}
           onFocus={handleFocus}
-          onBlur={handleBlur}
           onChange={handleChanges}
+          ref={ref}
         />
-        <HeaderSearchHis isShow={showHis} setKeyword={setKeyword}/>
+        <HeaderSearchHis isShow={showHis} setKeyword={setKeyword} ref={histRef}/>
         
         <Box sx={{ 
                   backgroundColor:'action.hover', 
