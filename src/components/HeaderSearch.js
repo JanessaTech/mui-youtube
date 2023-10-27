@@ -11,8 +11,8 @@ export default function HeaderSearch({isLargeScreen}) {
   const [showHis, setShowHis] = React.useState(false)
   const [search, setSearch] = React.useState('')
   const [clear, setClear] =  React.useState(false)
-  const ref = useRef(null)
   const histRef = useRef(null)
+  
   useEffect(() => {
     const handleOutSideClick = (event) => {
       if (!histRef.current?.contains(event.target)) {
@@ -20,7 +20,6 @@ export default function HeaderSearch({isLargeScreen}) {
         setShowHis(false)
       }
     };
-
     window.addEventListener("mousedown", handleOutSideClick);
     return () => {
       window.removeEventListener("mousedown", handleOutSideClick);
@@ -53,6 +52,16 @@ export default function HeaderSearch({isLargeScreen}) {
     setSearch(key)
     setShowHis(false)
     setClear(true)
+  }
+
+  const handleSearch = (e) => {
+    e.preventDefault()
+    console.log('search by  keyword')
+  }
+
+  const handleVoiceSearch = (e) => {
+    e.preventDefault()
+    console.log('search by voice')
   }
 
   return (
@@ -88,7 +97,6 @@ export default function HeaderSearch({isLargeScreen}) {
           }}
           onFocus={handleFocus}
           onChange={handleChanges}
-          ref={ref}
         />
         <HeaderSearchHis isShow={showHis} setKeyword={setKeyword} ref={histRef}/>
         
@@ -104,7 +112,7 @@ export default function HeaderSearch({isLargeScreen}) {
         >
           <Tooltip title="Search">
               <IconButton sx={{'&.MuiButtonBase-root':{p:'12px'}}} 
-                      aria-label="search" disableRipple>
+                      aria-label="search" disableRipple onClick={handleSearch}>
                 <YoutubeIcon name={'search'}/>
               </IconButton>
           </Tooltip>          
@@ -112,7 +120,7 @@ export default function HeaderSearch({isLargeScreen}) {
         </Box>
         <Tooltip title="Search with your voice">
           <IconButton sx={{'&.MuiButtonBase-root':{p:'13px'}, ml:2, [theme.breakpoints.down('sm')]:{display:'none'}}} 
-                      aria-label="voice_search">
+                      aria-label="voice_search" onClick={handleVoiceSearch}>
                 <YoutubeIcon name={'voice_search'}/>
           </IconButton>
         </Tooltip>
