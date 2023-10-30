@@ -22,7 +22,7 @@ export default function HeaderOthers() {
         </IconButton>
       </Tooltip>
       <Tooltip title="Me">
-        <IconButton sx={{mr:1, p:0}} disableRipple>
+        <IconButton sx={{mr:1, p:0}} disableRipple href='me'>
           <Avatar alt="Janessa Tech" src="imgs/prof.png"/>
         </IconButton>
       </Tooltip>

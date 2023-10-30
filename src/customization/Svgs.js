@@ -16,17 +16,16 @@ const svgMapping = new Map([
   ['search', 'imgs/len.svg'],
   ['voice_search','imgs/speaker.svg'],
   ['close', 'imgs/close.svg'],
-  ['hist', 'imgs/his.svg']
-
-  
+  ['hist', 'imgs/his.svg'],
+  ['more_intro', 'imgs/more_intro.svg']
 ])
 
-function generateIcon(src) {
+function generateIcon(src, size) {
   return (
-    <Icon sx={{width:iconSize, height:iconSize}}>
-      <img src={src} height={iconSize} width={iconSize}/>
+    <Icon sx={{width:size, height:size}}>
+      <img src={src} height={size} width={size}/>
     </Icon>
   )
 }
 
-export function YoutubeIcon({name}) {return (generateIcon(svgMapping.get(name) || 'imgs/bookmarker.svg'))}
+export function YoutubeIcon({name,size}) {return (generateIcon(svgMapping.get(name) || 'imgs/bookmarker.svg', size || iconSize))}

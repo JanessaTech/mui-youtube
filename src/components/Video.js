@@ -1,7 +1,8 @@
-import { Avatar, Box, Card, CardMedia, CssBaseline, IconButton, Link, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Card, CardMedia, IconButton, Link, Tooltip, Typography } from '@mui/material'
 import React from 'react'
+import MoreVertIcon from '@mui/icons-material/MoreVert';
 
-export default function Video() {
+export default function Video({url, videoSrc, author, img_profile, title, views, days}) {
     
     const autoPlayVideo = (e) => {
         e.preventDefault()
@@ -11,31 +12,39 @@ export default function Video() {
         e.preventDefault()
         e.target.pause()
     }
+
   return (
-    <Card sx={{width:1}} elevation={0}>
-        <Link href="/detail">
+    <Card sx={{width:1, backgroundColor:'inherit', pb:{xs:3, sm:0}}} elevation={0}>
+        <Link href={url}>
             <CardMedia 
                     sx={{borderRadius:3}}
                     component='video' 
-                    src='videos/20230529-210928.mp4' 
+                    src={videoSrc} 
                     controls muted 
                     onMouseOver={autoPlayVideo} onMouseOut={pauseVideo}
             />
-            <Box sx={{mt:1, backgroundColor:'#dfdede', display:'flex'}}>
+        
+            <Box sx={{mt:1, display:'flex', '&:hover .MuiSvgIcon-root':{color:'black', visibility:'visible'}}}>
                 <Box>
-                    <IconButton sx={{mr:1, p:0}} disableRipple>
-                        <Avatar alt="Janessa Tech" src="imgs/prof.png"/>
+                    <IconButton sx={{mr:1, p:0}} href='me'>
+                        <Avatar alt={author} src={img_profile}/>
                     </IconButton>
                 </Box>
                 <Box>
-                    <Typography variant="h6">Without a Goal, you can't Score | from Ireland, the Ring of Kerry</Typography>
-                    <Tooltip title="Janessa Tech" placement="top-start" >
-                        <Typography color="text.secondary">Janessa Tech</Typography>
+                    <Typography variant="h6">{title}</Typography>
+                    <Tooltip title={author} placement="top-start" >
+                        <Typography color="text.secondary">{author}</Typography>
                     </Tooltip>
-                    <Typography color="text.secondary">1.5K views • 5 days ago</Typography>
+                    <Typography color="text.secondary">{views} • {days}</Typography>
+                </Box>
+                <Box>
+                    <IconButton>
+                        <MoreVertIcon fontSize='small' sx={{visibility:'hidden'}}/>
+                    </IconButton>
                 </Box>
             </Box>
-        </Link>    
+        </Link>
+            
     </Card>
   )
 }
