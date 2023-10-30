@@ -56,7 +56,7 @@ export default function HeaderSearch({isLargeScreen}) {
 
   const handleSearch = (e) => {
     e.preventDefault()
-    console.log('search by  keyword')
+    console.log('search by ', search)
   }
 
   const handleVoiceSearch = (e) => {

@@ -47,22 +47,22 @@ export default function Home() {
   }
  
   return (
-    <Container maxWidth='false'>
-        <Box sx={{position: 'relative'}}>
-            <Header toggleMenu={toggleMenu} isLargeScreen={isLargeScreen}/>
-            <FullMenu isHome={true} open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>
-            <MinMenu isHome={true} open={!isLargeMenu && !isSmallMemu}></MinMenu>
-            <Drawer
-                    sx={{'& .MuiDrawer-paper': { boxSizing: 'border-box', width: fullDrawerWidth }}}
-                    open={drawerOpen}
-                    anchor="left"
-                    onClose={closeDrawer}
-                >
-                    <FullMenu isHome={true} open={true} toggleMenu={toggleMenu} isInDrawer={true}></FullMenu>
-            </Drawer>
-            <Main isLargeMenu={isLargeMenu}/>
-        </Box>
-    </Container>  
+    <Container maxWidth='false'>         
+            <Box sx={{position: 'relative'}}>
+                <Header toggleMenu={toggleMenu} isLargeScreen={isLargeScreen}/>
+                <FullMenu isHome={true} open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>
+                <MinMenu isHome={true} open={!isLargeMenu && !isSmallMemu}></MinMenu>
+                <Drawer
+                        sx={{'& .MuiDrawer-paper': { boxSizing: 'border-box', width: fullDrawerWidth }}}
+                        open={drawerOpen}
+                        anchor="left"
+                        onClose={closeDrawer}
+                    >
+                        <FullMenu isHome={true} open={true} toggleMenu={toggleMenu} isInDrawer={true}></FullMenu>
+                </Drawer>
+                <Main isLargeMenu={isLargeMenu}/>
+            </Box>
+    </Container>
   )
 }
 
