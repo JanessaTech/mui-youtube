@@ -28,7 +28,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
       <MenuList >
         {['home', 'shorts', 'subscriptions'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton disableRipple selected={isHome ? text === 'home' : false}>
+            <ListItemButton disableRipple selected={isHome ? text === 'home' : false} href={text === 'home' ? '/' : '#'}>
               <ListItemIcon>
                 <YoutubeIcon name={text}/>
               </ListItemIcon>

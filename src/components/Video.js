@@ -2,6 +2,7 @@ import { Avatar, Box, Card, CardMedia, IconButton, Link, Tooltip, Typography } f
 import React from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 
+
 export default function Video({url, videoSrc, author, img_profile, title, views, days}) {
     
     const autoPlayVideo = (e) => {
@@ -24,19 +25,23 @@ export default function Video({url, videoSrc, author, img_profile, title, views,
                     onMouseOver={autoPlayVideo} onMouseOut={pauseVideo}
             />
         
-            <Box sx={{mt:1, display:'flex', '&:hover .MuiSvgIcon-root':{color:'black', visibility:'visible'}}}>
-                <Box>
-                    <IconButton sx={{mr:1, p:0}} href='me'>
-                        <Avatar alt={author} src={img_profile}/>
-                    </IconButton>
+            <Box sx={{mt:1, display:'flex', justifyContent: 'space-between', '&:hover .MuiSvgIcon-root':{color:'black', visibility:'visible'}}}>
+                
+                <Box sx={{display:'flex'}}>
+                    <Box>
+                        <IconButton sx={{mr:1, p:0}} href='me'>
+                            <Avatar alt={author} src={img_profile}/>
+                        </IconButton>
+                    </Box>
+                    <Box>
+                        <Typography variant="h6">{title}</Typography>
+                        <Tooltip title={author} placement="top-start" >
+                            <Typography color="text.secondary">{author}</Typography>
+                        </Tooltip>
+                        <Typography color="text.secondary">{views} • {days}</Typography>
+                    </Box>
                 </Box>
-                <Box>
-                    <Typography variant="h6">{title}</Typography>
-                    <Tooltip title={author} placement="top-start" >
-                        <Typography color="text.secondary">{author}</Typography>
-                    </Tooltip>
-                    <Typography color="text.secondary">{views} • {days}</Typography>
-                </Box>
+                
                 <Box>
                     <IconButton>
                         <MoreVertIcon fontSize='small' sx={{visibility:'hidden'}}/>

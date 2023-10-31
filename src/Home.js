@@ -5,8 +5,9 @@ import MinMenu from './components/MinMenu';
 import { useTheme } from '@mui/material/styles';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import Header from './components/Header';
-import {fullDrawerWidth} from './common/Constants'
 import Main from './components/Main';
+import { YoutubeDrawer } from './common/YoutubeDrawer';
+import {mockVideos} from './data/Videos'
 
 export default function Home() {
 
@@ -16,6 +17,7 @@ export default function Home() {
   const [isLargeMenu, setIsLargeMenu] = React.useState(isLargeScreen)
   const [isSmallMemu, setIsSmallMemu] = React.useState(isSmallScreen)
   const [drawerOpen, setDrawerOpen] = React.useState(false)
+  const [videos, setVideos] = React.useState([...mockVideos])
 
   useEffect(() => {
     setIsLargeMenu(isLargeScreen)
@@ -45,22 +47,23 @@ export default function Home() {
       toggleDrawer(e)
     }
   }
+
+  const searchVideosCallback = (videos) => {
+    console.log('searchVideosCallback is called')
+    console.log('found ', videos.length, 'videos')
+    setVideos(videos)
+  }
  
   return (
     <Container maxWidth='false'>         
             <Box sx={{position: 'relative'}}>
-                <Header toggleMenu={toggleMenu} isLargeScreen={isLargeScreen}/>
+                <Header toggleMenu={toggleMenu} isLargeScreen={isLargeScreen} videoCb={searchVideosCallback}/>
                 <FullMenu isHome={true} open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>
                 <MinMenu isHome={true} open={!isLargeMenu && !isSmallMemu}></MinMenu>
-                <Drawer
-                        sx={{'& .MuiDrawer-paper': { boxSizing: 'border-box', width: fullDrawerWidth }}}
-                        open={drawerOpen}
-                        anchor="left"
-                        onClose={closeDrawer}
-                    >
-                        <FullMenu isHome={true} open={true} toggleMenu={toggleMenu} isInDrawer={true}></FullMenu>
-                </Drawer>
-                <Main isLargeMenu={isLargeMenu}/>
+                <YoutubeDrawer open={drawerOpen} onClose={closeDrawer}>
+                  <FullMenu isHome={true} open={true} toggleMenu={toggleMenu} isInDrawer={true}></FullMenu>
+                </YoutubeDrawer>
+                <Main isLargeMenu={isLargeMenu} videos={videos}/>
             </Box>
     </Container>
   )

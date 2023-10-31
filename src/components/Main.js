@@ -4,7 +4,8 @@ import {fullDrawerWidth, minDrawerWidth, headerHeight} from '../common/Constants
 import YoutubeTabs from './YoutubeTabs';
 import VideoLayout from './VideoLayout';
 
-export default function Main({isLargeMenu}) {
+export default function Main({isLargeMenu, videos}) {
+
   return (
     <Box component='main'
         sx={{
@@ -15,7 +16,7 @@ export default function Main({isLargeMenu}) {
         }}
     >
         <YoutubeTabs curTab={'All'}/>
-        <VideoLayout/>
+        <VideoLayout videos={videos}/>
     </Box>
   )
 }

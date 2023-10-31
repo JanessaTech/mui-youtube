@@ -5,8 +5,9 @@ import { YoutubeIcon } from '../customization/Svgs'
 import { useTheme } from '@mui/material/styles';
 import HeaderSearchHis from './HeaderSearchHis';
 import { useRef, useEffect } from 'react';
+import {mockVideos} from '../data/Videos'
 
-export default function HeaderSearch({isLargeScreen}) {
+export default function HeaderSearch({isLargeScreen, videoCb}) {
   const theme = useTheme()
   const [showHis, setShowHis] = React.useState(false)
   const [search, setSearch] = React.useState('')
@@ -57,6 +58,12 @@ export default function HeaderSearch({isLargeScreen}) {
   const handleSearch = (e) => {
     e.preventDefault()
     console.log('search by ', search)
+    if (!search) {
+      console.log('return all video by default')
+      videoCb(mockVideos)
+    } else {
+      videoCb(mockVideos.filter((v) => {return v.key === search}))
+    }
   }
 
   const handleVoiceSearch = (e) => {
