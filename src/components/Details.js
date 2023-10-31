@@ -6,20 +6,6 @@ import { useEffect } from 'react';
 import Header from './Header';
 import FullMenu from './FullMenu';
 import { YoutubeDrawer } from '../common/YoutubeDrawer';
-/*
-const YoutubeDrawer = styled((props) => {
-  const {open, onClose, ...others} = props;
-  console.log('others,', others)
-  return <Drawer
-            sx={{'& .MuiDrawer-paper': { boxSizing: 'border-box', width: fullDrawerWidth }}}
-            open={open}
-            anchor="left"
-            onClose={onClose}
-            {...others}
-          />;
-})({})*/
-
-
 
 export default function Details() {
   const theme = useTheme();

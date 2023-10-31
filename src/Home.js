@@ -8,6 +8,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import { YoutubeDrawer } from './common/YoutubeDrawer';
 import {mockVideos} from './data/Videos'
+import { useSearchParams } from "react-router-dom";
 
 export default function Home() {
 
@@ -17,7 +18,14 @@ export default function Home() {
   const [isLargeMenu, setIsLargeMenu] = React.useState(isLargeScreen)
   const [isSmallMemu, setIsSmallMemu] = React.useState(isSmallScreen)
   const [drawerOpen, setDrawerOpen] = React.useState(false)
-  const [videos, setVideos] = React.useState([...mockVideos])
+  const [videos, setVideos] = React.useState([])
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    // mock the functionalities of restful calling to fetch video by search_query
+    const search = searchParams.get('search_query')
+    setVideos(search ? mockVideos.filter((v) => {return v.key === search}) : mockVideos)
+  }, [searchParams])
 
   useEffect(() => {
     setIsLargeMenu(isLargeScreen)
@@ -48,16 +56,10 @@ export default function Home() {
     }
   }
 
-  const searchVideosCallback = (videos) => {
-    console.log('searchVideosCallback is called')
-    console.log('found ', videos.length, 'videos')
-    setVideos(videos)
-  }
- 
   return (
     <Container maxWidth='false'>         
             <Box sx={{position: 'relative'}}>
-                <Header toggleMenu={toggleMenu} isLargeScreen={isLargeScreen} videoCb={searchVideosCallback}/>
+                <Header toggleMenu={toggleMenu} isLargeScreen={isLargeScreen}/>
                 <FullMenu isHome={true} open={isLargeMenu} toggleMenu={toggleMenu}></FullMenu>
                 <MinMenu isHome={true} open={!isLargeMenu && !isSmallMemu}></MinMenu>
                 <YoutubeDrawer open={drawerOpen} onClose={closeDrawer}>

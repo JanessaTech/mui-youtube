@@ -6,13 +6,22 @@ import { useTheme } from '@mui/material/styles';
 import HeaderSearchHis from './HeaderSearchHis';
 import { useRef, useEffect } from 'react';
 import {mockVideos} from '../data/Videos'
+import { useSearchParams } from "react-router-dom";
+import {useNavigate} from 'react-router-dom';
 
-export default function HeaderSearch({isLargeScreen, videoCb}) {
+export default function HeaderSearch({isLargeScreen}) {
   const theme = useTheme()
+  const navigate = useNavigate();
   const [showHis, setShowHis] = React.useState(false)
   const [search, setSearch] = React.useState('')
   const [clear, setClear] =  React.useState(false)
   const histRef = useRef(null)
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  useEffect(() => {
+    const search = searchParams.get('search_query')
+    setSearch(search)
+  }, [searchParams])
   
   useEffect(() => {
     const handleOutSideClick = (event) => {
@@ -58,12 +67,7 @@ export default function HeaderSearch({isLargeScreen, videoCb}) {
   const handleSearch = (e) => {
     e.preventDefault()
     console.log('search by ', search)
-    if (!search) {
-      console.log('return all video by default')
-      videoCb(mockVideos)
-    } else {
-      videoCb(mockVideos.filter((v) => {return v.key === search}))
-    }
+    navigate(`/results?search_query=${search}`)
   }
 
   const handleVoiceSearch = (e) => {
