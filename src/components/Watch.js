@@ -7,7 +7,7 @@ import Header from './Header';
 import FullMenu from './FullMenu';
 import { YoutubeDrawer } from '../common/YoutubeDrawer';
 
-export default function Details() {
+export default function Watch() {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const [isLargeMenu, setIsLargeMenu] = React.useState(isLargeScreen)

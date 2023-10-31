@@ -8,7 +8,7 @@ import {
 import { ThemeProvider } from "@mui/material";
 import YoutubeTheme from "./common/GlobalTheme";
 
-import Details from "./components/Details";
+import Watch from "./components/Watch";
 import Profile from "./components/Profile";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home/>}/>
           <Route path="/results" element={<Home/>}/>
-          <Route path="/detail" element={<Details/>}/>
+          <Route path="/watch" element={<Watch/>}/>
           <Route path="/me" element={<Profile/>}/>
         </Routes>
       </Router>
