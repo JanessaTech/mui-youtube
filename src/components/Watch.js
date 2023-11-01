@@ -1,19 +1,30 @@
 import { Box, Container } from '@mui/material'
 import React from 'react'
-import { useTheme } from '@mui/material/styles';
-import useMediaQuery from '@mui/material/useMediaQuery';
-import { useEffect } from 'react';
-import Header from './Header';
-import FullMenu from './FullMenu';
-import { YoutubeDrawer } from '../common/YoutubeDrawer';
+import { useTheme } from '@mui/material/styles'
+import useMediaQuery from '@mui/material/useMediaQuery'
+import { useEffect } from 'react'
+import Header from './Header'
+import FullMenu from './FullMenu'
+import { YoutubeDrawer } from '../common/YoutubeDrawer'
+import { headerHeight} from '../common/Constants'
+import Masonry from 'react-masonry-css'
+import VideoInPlay from './VideoInPlay'
+import Comments from './Comments'
+import RecommendIn from './RecommendIn'
+import RecommendOut from './RecommendOut'
+
+
+
+const breakpointColumnsObj = {
+  1536: 2,
+  1200: 1
+};
 
 export default function Watch() {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const [isLargeMenu, setIsLargeMenu] = React.useState(isLargeScreen)
   const [drawerOpen, setDrawerOpen] = React.useState(false)
-
-
 
   useEffect(() => {
     setIsLargeMenu(isLargeScreen)
@@ -38,13 +49,21 @@ export default function Watch() {
 
   return (
     <Container maxWidth='xl'>
-      <Box sx={{backgroundColor:'#c8c8c8', width:1, height:'100vh'}}>
+      <Box sx={{width:1}}>
         <Header toggleMenu={toggleMenu} isLargeScreen={isLargeScreen}/>
         <YoutubeDrawer open={drawerOpen} onClose={closeDrawer}>
           <FullMenu isHome={false} open={true} toggleMenu={toggleMenu} isInDrawer={true}></FullMenu>
         </YoutubeDrawer>
+        <Box sx={{width:1, height: 800, marginTop:`${headerHeight}px`, display:'flex', justifyContent:'space-between'}}>
+            <Box sx={{width:{xs:1, sm:1, md:1, lg:0.7, xl:0.7}}}>
+              <VideoInPlay/>
+              <RecommendIn/>
+              <Comments/>
+            </Box>
+            <RecommendOut/>
+            
+        </Box>
       </Box>
-
     </Container>
   )
 }

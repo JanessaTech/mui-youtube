@@ -80,7 +80,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
       </MenuList>
       <Divider />
       <MenuList>
-        <ListSubheader sx={{backgroundColor:'#f3f2f2', fontSize:'1.2em', color: '#4b4b4b'}}>Subscriptions</ListSubheader>
+        <ListSubheader sx={{backgroundColor:'inherit', fontSize:'1.2em', color: '#4b4b4b'}}>Subscriptions</ListSubheader>
         {new Array(5).fill('Janessa Tech').map((text, index) => (
           <ListItem key={index} disablePadding>
             <ListItemButton disableRipple >
