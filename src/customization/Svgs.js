@@ -9,15 +9,22 @@ const svgMapping = new Map([
   ['history', 'imgs/his.svg'],
   ['your videos', 'imgs/video.svg'],
   ['watch later', 'imgs/watch.svg'],
-  ['more', 'imgs/arrow-down.svg'],
-  ['less', 'imgs/arrow-up.svg'],
+  ['arrow-down', 'imgs/arrow-down.svg'],
+  ['arrow-up', 'imgs/arrow-up.svg'],
   ['create', 'imgs/video-plus.svg'],
   ['notification', 'imgs/togzhi.svg'],
   ['search', 'imgs/len.svg'],
   ['voice_search','imgs/speaker.svg'],
   ['close', 'imgs/close.svg'],
   ['hist', 'imgs/his.svg'],
-  ['more_intro', 'imgs/more_intro.svg']
+  ['more_intro', 'imgs/more_intro.svg'],
+  ['prof', 'imgs/prof.png'],
+  ['togzhi', 'imgs/togzhi.svg'],
+  ['support', 'imgs/support.svg'],
+  ['support-no','imgs/support-no.svg'],
+  ['share','imgs/share.svg'],
+  ['save','imgs/save.svg'],
+  ['more', 'imgs/more.svg']
 ])
 
 function generateIcon(src, size) {

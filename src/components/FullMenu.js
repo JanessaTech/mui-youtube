@@ -52,7 +52,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <ListItem sx={{display: showLibMore? 'block': 'none'}} key={'show more lib'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowLibMore}>
             <ListItemIcon>
-              <YoutubeIcon name={'more'}/>
+              <YoutubeIcon name={'arrow-down'}/>
             </ListItemIcon>
             <ListItemText primary={capitalize('show more')} />
           </ListItemButton>
@@ -72,7 +72,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <ListItem sx={{display: !showLibMore ? 'block': 'none'}} key={'show less lib'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowLibMore}>
             <ListItemIcon>
-              <YoutubeIcon name={'less'}/>
+              <YoutubeIcon name={'arrow-up'}/>
             </ListItemIcon>
             <ListItemText primary={capitalize('show less')} />
           </ListItemButton>
@@ -94,7 +94,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <ListItem sx={{display: showSubMore? 'block': 'none'}} key={'show more sub'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowSubMore}>
             <ListItemIcon>
-              <YoutubeIcon name={'more'}/>
+              <YoutubeIcon name={'arrow-down'}/>
             </ListItemIcon>
             <ListItemText primary={capitalize('show more')} />
           </ListItemButton>
@@ -114,7 +114,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <ListItem sx={{display: !showSubMore? 'block': 'none'}} key={'show less sub'} disablePadding>
           <ListItemButton disableRipple onClick={toggleShowSubMore}>
             <ListItemIcon>
-              <YoutubeIcon name={'less'}/>
+              <YoutubeIcon name={'arrow-up'}/>
             </ListItemIcon>
             <ListItemText primary={capitalize('show less')} />
           </ListItemButton>
