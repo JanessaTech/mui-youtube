@@ -15,7 +15,7 @@ export const MenuList = styled(List)(({ theme }) => theme.unstable_sx({
  export const MenuList = styled(List)({
   color:'common.black', 
    '& .MuiTypography-root': {fontSize: '1.2em'},
-   '& li > div:hover': {borderRadius:12},
-   '& li > div:active': {backgroundColor:'#c8c8c8'},
-   '& .Mui-selected':{borderRadius:12}
+   '& .MuiListItemButton-root:hover': {borderRadius:12},
+   '& .Mui-selected':{borderRadius:12, backgroundColor:'rgba(0,0,0,0.08)'},
+   '& .Mui-selected:hover':{backgroundColor:'rgba(0,0,0,0.20)'}
  })

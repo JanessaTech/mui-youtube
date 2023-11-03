@@ -1,11 +1,10 @@
 
-import { Box, IconButton, InputAdornment, TextField, Tooltip } from '@mui/material'
+import { Box, Button, IconButton, InputAdornment, TextField, Tooltip } from '@mui/material'
 import React from 'react'
 import { YoutubeIcon } from '../customization/Svgs'
 import { useTheme } from '@mui/material/styles';
 import HeaderSearchHis from './HeaderSearchHis';
 import { useRef, useEffect } from 'react';
-import {mockVideos} from '../data/Videos'
 import { useSearchParams } from "react-router-dom";
 import {useNavigate} from 'react-router-dom';
 
@@ -80,14 +79,14 @@ export default function HeaderSearch({isLargeScreen}) {
       <Box sx={{display:'flex', position:'relative'}} component='form' noValidate autoComplete='off'>
         <TextField sx={{
               '& .MuiOutlinedInput-root':{
-                    'fieldset' : {borderRadius:'28px 0 0 28px'},
+                    'fieldset' : {borderRadius:'50vh 0 0 50vh'},
                     '&.Mui-focused fieldset': {borderColor:'primary.main'},
                     
 
                   },
               '& .MuiInputBase-adornedStart' :{pl: 2}
               }}
-          id="outlined-basic" 
+          id="youtube-search-input" 
           value={search}
           variant="outlined" 
           placeholder='Search'
@@ -111,26 +110,19 @@ export default function HeaderSearch({isLargeScreen}) {
         />
         <HeaderSearchHis isShow={showHis} setKeyword={setKeyword} ref={histRef}/>
         
-        <Box sx={{ 
-                  backgroundColor:'action.hover', 
-                  px:1,
-                  boxSizing:'border-box',
-                  border:'1px solid rgba(0, 0, 0, 0.23)',
-                  borderRadius:'0 28px 28px 0', 
-                  '&:hover':{backgroundColor:'action.selected'},
-                  '&:active':{backgroundColor:'action.focus'}
-                  }}
-        >
-          <Tooltip title="Search">
-              <IconButton sx={{'&.MuiButtonBase-root':{p:'12px'}}} 
-                      aria-label="search" disableRipple onClick={handleSearch}>
-                <YoutubeIcon name={'search'}/>
-              </IconButton>
-          </Tooltip>          
-           
-        </Box>
+        <Tooltip title="Search">
+              <Button 
+                  sx={{borderRadius:'0 50vh 50vh 0', border:'1px solid #bdbdbd', boxSizing:'border-box'}}
+                  startIcon={<YoutubeIcon name={'search'}/>} 
+                  onClick={handleSearch}/>
+        </Tooltip>          
         <Tooltip title="Search with your voice">
-          <IconButton sx={{'&.MuiButtonBase-root':{p:'13px'}, ml:2, [theme.breakpoints.down('sm')]:{display:'none'}}} 
+          <IconButton sx={{
+                          '&.MuiButtonBase-root':{p:'13px'}, 
+                          ml:2, 
+                          [theme.breakpoints.down('sm')]:{display:'none'},
+                          
+                        }} 
                       aria-label="voice_search" onClick={handleVoiceSearch}>
                 <YoutubeIcon name={'voice_search'}/>
           </IconButton>

@@ -28,7 +28,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
       <MenuList >
         {['home', 'shorts', 'subscriptions'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton disableRipple selected={isHome ? text === 'home' : false} href={text === 'home' ? '/' : '#'}>
+            <ListItemButton selected={isHome ? text === 'home' : false} href={text === 'home' ? '/' : '#'}>
               <ListItemIcon>
                 <YoutubeIcon name={text}/>
               </ListItemIcon>
@@ -41,7 +41,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
       <MenuList >
         {['library', 'history', 'your videos', 'watch later'].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton disableRipple>
+            <ListItemButton >
               <ListItemIcon>
                 <YoutubeIcon name={text}/>
               </ListItemIcon>
@@ -50,7 +50,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
           </ListItem>
         ))}
         <ListItem sx={{display: showLibMore? 'block': 'none'}} key={'show more lib'} disablePadding>
-          <ListItemButton disableRipple onClick={toggleShowLibMore}>
+          <ListItemButton onClick={toggleShowLibMore}>
             <ListItemIcon>
               <YoutubeIcon name={'arrow-down'}/>
             </ListItemIcon>
@@ -60,7 +60,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <Collapse in={!showLibMore} timeout="auto" unmountOnExit>
           {['FullStack Dev', 'Web3.0 Dev', 'Ethereum'].map((text, index) => (
             <ListItem key={text} disablePadding>
-              <ListItemButton disableRipple>
+              <ListItemButton>
                 <ListItemIcon>
                   <YoutubeIcon name={text}/>
                 </ListItemIcon>
@@ -70,7 +70,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
           ))}
         </Collapse>
         <ListItem sx={{display: !showLibMore ? 'block': 'none'}} key={'show less lib'} disablePadding>
-          <ListItemButton disableRipple onClick={toggleShowLibMore}>
+          <ListItemButton onClick={toggleShowLibMore}>
             <ListItemIcon>
               <YoutubeIcon name={'arrow-up'}/>
             </ListItemIcon>
@@ -83,7 +83,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <ListSubheader sx={{backgroundColor:'inherit', fontSize:'1.2em', color: '#4b4b4b'}}>Subscriptions</ListSubheader>
         {new Array(5).fill('Janessa Tech').map((text, index) => (
           <ListItem key={index} disablePadding>
-            <ListItemButton disableRipple >
+            <ListItemButton >
               <ListItemAvatar>
                 <Avatar sx={{ width: 35, height: 35 }} alt="Janessa Tech" src="imgs/prof.png" />
               </ListItemAvatar>
@@ -92,7 +92,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
           </ListItem>
         ))}
         <ListItem sx={{display: showSubMore? 'block': 'none'}} key={'show more sub'} disablePadding>
-          <ListItemButton disableRipple onClick={toggleShowSubMore}>
+          <ListItemButton onClick={toggleShowSubMore}>
             <ListItemIcon>
               <YoutubeIcon name={'arrow-down'}/>
             </ListItemIcon>
@@ -102,7 +102,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
         <Collapse in={!showSubMore} timeout="auto" unmountOnExit>
             {new Array(20).fill('Janessa Tech').map((text, index) => (
               <ListItem key={text} disablePadding>
-                <ListItemButton disableRipple >
+                <ListItemButton >
                   <ListItemAvatar>
                     <Avatar sx={{ width: 35, height: 35 }} alt="Janessa Tech" src="imgs/prof.png" />
                   </ListItemAvatar>
@@ -112,7 +112,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
             ))}
         </Collapse>
         <ListItem sx={{display: !showSubMore? 'block': 'none'}} key={'show less sub'} disablePadding>
-          <ListItemButton disableRipple onClick={toggleShowSubMore}>
+          <ListItemButton onClick={toggleShowSubMore}>
             <ListItemIcon>
               <YoutubeIcon name={'arrow-up'}/>
             </ListItemIcon>
