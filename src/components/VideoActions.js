@@ -1,12 +1,27 @@
-import { Avatar, Box, Button, IconButton, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Button, IconButton, Snackbar, Tooltip, Typography } from '@mui/material'
 import React from 'react'
 import { YoutubeIcon } from '../customization/Svgs'
+import Slide from '@mui/material/Slide';
+
+function SlideTransition(props) {
+    return <Slide {...props} direction="up" />;
+  }
 
 export default function VideoActions() {
+    const [isSubscribed, setIsSubscribed] = React.useState(false)
+    const [openSnackbar, setSnackbar] = React.useState(false)
+    const handleSubscribe = (e) => {
+        e.preventDefault()
+        setSnackbar(true)
+        setIsSubscribed(true)
+    }
+    const closeSnackbar = () => {
+        setSnackbar(false)
+    }
   return (
     <Box sx={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', my:1}}>
         <Box sx={{display:'flex', alignItems:'center'}}>
-            <IconButton sx={{p:0}} href='me' disableRipple>
+            <IconButton sx={{p:0}} href='me'>
                 <Avatar sx={{ width: 50, height: 50 }} alt="Janessa Tech" src="imgs/prof.png"/>
             </IconButton>
             <Box sx={{ml:1, mr:1}}>
@@ -18,15 +33,26 @@ export default function VideoActions() {
             <Box>
                 <Button sx={{
                             '&.MuiButtonBase-root':{borderRadius:'50vh'},
+                            display:isSubscribed ? 'flex' : 'none',
                         }}
                         variant="contained" 
                         style={{textTransform: 'none'}} 
                         startIcon={<YoutubeIcon name={'togzhi'}/>} 
                         endIcon={<YoutubeIcon name={'arrow-down'}/>}
-                        disableRipple
                         disableElevation
+                        onClick={handleSubscribe}
                 >
                     <Typography variant='h6' color='text.primary'>Subscribed</Typography>
+                </Button>
+                <Button sx={{
+                            display:isSubscribed ? 'none' : 'block',
+                            px:2,
+                            '&.MuiButtonBase-root':{borderRadius:'50vh'}, 
+                            backgroundColor:'common.black', 
+                            '&.MuiButtonBase-root:hover':{backgroundColor:'rgba(0,0,0,0.7)'},
+                            '&.MuiButtonBase-root:active':{backgroundColor:'rgba(0,0,0,0.8)'},
+                            color: 'common.white', textTransform: 'none'}} disableElevation onClick={handleSubscribe}>
+                    <Typography variant='h6' color='inherit'>Subscribe</Typography>
                 </Button>
             </Box>
             
@@ -94,6 +120,16 @@ export default function VideoActions() {
                 <YoutubeIcon name='more'/>
             </IconButton>  
         </Box>
+        <Snackbar sx={{'&.MuiSnackbar-root .MuiSnackbarContent-root': {minWidth:'100px', width:'fit-content', fontSize:'1.2em'}}}
+            open={openSnackbar}
+            autoHideDuration={2000}
+            onClose={closeSnackbar}
+            message="Subscribed successfully"
+            TransitionComponent={SlideTransition}
+            key={SlideTransition.name}
+        >
+
+        </Snackbar>
     </Box>
   )
 }
