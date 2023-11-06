@@ -17,7 +17,7 @@ export default function HeaderOthers() {
       <Tooltip title="Notifications">
         <IconButton sx={{mr:1, [theme.breakpoints.down('sm')]:{display:'none'}}}>
           <Badge badgeContent={4} color="error">
-            <YoutubeIcon name={'notification'}/>
+            <YoutubeIcon name={'tongzhi'}/>
           </Badge>
         </IconButton>
       </Tooltip>

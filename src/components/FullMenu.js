@@ -2,7 +2,7 @@ import { Avatar, Box, Collapse, Divider, ListItem, ListItemAvatar, ListItemButto
 import React from 'react'
 import Burger from './Burger';
 import {fullDrawerWidth, headerHeight} from '../common/Constants'
-import {MenuList} from '../customization/MenuList'
+import {YoutubeMenuList} from '../customization/YoutubeStyling'
 import {YoutubeIcon} from '../customization/Svgs'
 
 function capitalize(s)
@@ -25,7 +25,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
 
   const drawer = (
     <Box sx={{width:260}}>
-      <MenuList >
+      <YoutubeMenuList >
         {['home', 'shorts', 'subscriptions'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton selected={isHome ? text === 'home' : false} href={text === 'home' ? '/' : '#'}>
@@ -36,9 +36,9 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
             </ListItemButton>
           </ListItem>
         ))}
-      </MenuList>
+      </YoutubeMenuList>
       <Divider />
-      <MenuList >
+      <YoutubeMenuList >
         {['library', 'history', 'your videos', 'watch later'].map((text, index) => (
           <ListItem key={text} disablePadding>
             <ListItemButton >
@@ -77,9 +77,9 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
             <ListItemText primary={capitalize('show less')} />
           </ListItemButton>
         </ListItem> 
-      </MenuList>
+      </YoutubeMenuList>
       <Divider />
-      <MenuList>
+      <YoutubeMenuList>
         <ListSubheader sx={{backgroundColor:'inherit', fontSize:'1.2em', color: '#4b4b4b'}}>Subscriptions</ListSubheader>
         {new Array(5).fill('Janessa Tech').map((text, index) => (
           <ListItem key={index} disablePadding>
@@ -119,7 +119,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
             <ListItemText primary={capitalize('show less')} />
           </ListItemButton>
         </ListItem> 
-      </MenuList>
+      </YoutubeMenuList>
       <Divider />
       <Typography>
         About Press Copyright

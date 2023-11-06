@@ -1,22 +1,116 @@
-import { Avatar, Box, Button, IconButton, Snackbar, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, IconButton, ListItemIcon, ListItemText, Menu, Snackbar, Tooltip, Typography } from '@mui/material'
 import React from 'react'
 import { YoutubeIcon } from '../customization/Svgs'
 import Slide from '@mui/material/Slide';
+import PropTypes from 'prop-types';
+import {YoutubeMenuItem} from '../customization/YoutubeStyling'
 
 function SlideTransition(props) {
     return <Slide {...props} direction="up" />;
-  }
+}
+
+function UnSubscribeDialog(props) {
+    const {open, onClose, onUnsubscribe, from, ...others} = props
+    const handleUnsubscribe = () => {
+        onClose()
+        onUnsubscribe()
+    }
+    return <Dialog
+                open={open}
+                onClose={onClose}
+                aria-labelledby="unSubscribe-dialog-title"
+                aria-describedby="unSubscribe-dialog-description"
+                {...others}
+            >
+                <DialogContent>
+                    <DialogContentText id="unSubscribe-dialog-description">
+                        <Typography variant='h6'>Unsubscribe from {from}?</Typography>   
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions sx={{justifyContent:'center'}}>
+                    <Button sx={{px:3, backgroundColor:'inherit', fontSize:'1.2em', 
+                                color:'black', borderRadius:'50vh',
+                                }}
+                            style={{textTransform:'none'}} 
+                            onClick={onClose}>Cancel</Button>
+                    <Button sx={{px:3,
+                                backgroundColor:'inherit', fontSize:'1.2em',
+                                borderRadius:'50vh',
+                                '&:hover':{backgroundColor:'#e3f2fd'},
+                                '&:active':{backgroundColor:'#bbdefb'}}} 
+                                style={{textTransform:'none'}}
+                                onClick={handleUnsubscribe} autoFocus>Unsubscribe</Button>
+                </DialogActions>
+            </Dialog>
+}
+
+UnSubscribeDialog.propTypes = {
+    open: PropTypes.bool.isRequired,
+    onClose: PropTypes.func.isRequired,
+    onUnsubscribe: PropTypes.func.isRequired,
+    from: PropTypes.string.isRequired
+}
 
 export default function VideoActions() {
-    const [isSubscribed, setIsSubscribed] = React.useState(false)
-    const [openSnackbar, setSnackbar] = React.useState(false)
+    const subOptions = [ 'tongzhi-fill','tongzhi', 'tongzhi-no', 'unreg']
+    const [state, setState] = React.useState(
+        {
+            subIndex : 1,
+            isSubscribed: false,
+            openSubSnackbar: false,
+            openUnsubSnackbar: false,
+            anchorSub: null,
+            anchorReport: null,
+            isUnSubscribeDialogOpen: false, 
+            likes: 555
+        }
+    )
+   
+    const isSubMenuOpen = Boolean(state.anchorSub)
+    const isReportMenuOpen = Boolean(state.anchorReport);
+
     const handleSubscribe = (e) => {
         e.preventDefault()
-        setSnackbar(true)
-        setIsSubscribed(true)
+        setState({...state, openSubSnackbar: true, isSubscribed: true})
     }
-    const closeSnackbar = () => {
-        setSnackbar(false)
+    const handleSubIndex = (e, index) => {
+        e.preventDefault()
+        setState({...state, subIndex: index, anchorSub: null})
+    }
+    const handleCloseUnSubscribeDialog = () => {
+        setState({...state, isUnSubscribeDialogOpen:false})
+    }
+    const handleUnsubscribe = () => {
+        setState({...state, isSubscribed: false, isUnSubscribeDialogOpen: false, openUnsubSnackbar: true})
+    }
+    const openUnsubscribeDialog = (e) => {
+        e.preventDefault()
+        setState({...state, isUnSubscribeDialogOpen: true, anchorSub: null})
+    }
+    const closeSubSnackbar = () => {
+        setState({...state, openSubSnackbar: false})
+    }
+    const closeUnsubSnackbar = () => {
+        setState({...state, openUnsubSnackbar: false})
+    }
+    const openSubMenu = (e) => {
+        setState({...state, anchorSub: e.currentTarget})
+    }
+    const openReportMenu = (e) => {
+        setState({...state, anchorReport: e.currentTarget})
+    }
+    const closeSubMenu = () => {
+        setState({...state, anchorSub: null})
+    }
+    const closeReportMenu = () => {
+        setState({...state, anchorReport: null})
+    }
+
+    const increaseLikes = () => {
+        setState({...state, likes: state.likes + 1})
+    }
+    const decreaseLikes = () => {
+        setState({...state, likes: state.likes > 0 ? state.likes - 1 : 0})
     }
   return (
     <Box sx={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', my:1}}>
@@ -31,21 +125,26 @@ export default function VideoActions() {
                 <Typography sx={{whiteSpace:'nowrap'}} variant='body2' color="text.secondary">4.83M subscribers</Typography>
             </Box>
             <Box>
-                <Button sx={{
+                <Button 
+                        id='sub-button'
+                        sx={{
                             '&.MuiButtonBase-root':{borderRadius:'50vh'},
-                            display:isSubscribed ? 'flex' : 'none',
+                            display:state.isSubscribed ? 'flex' : 'none',
                         }}
+                        aria-controls={isSubMenuOpen ? 'sub-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={isSubMenuOpen ? 'true' : undefined}
                         variant="contained" 
                         style={{textTransform: 'none'}} 
-                        startIcon={<YoutubeIcon name={'togzhi'}/>} 
+                        startIcon={<YoutubeIcon name={subOptions[state.subIndex]}/>} 
                         endIcon={<YoutubeIcon name={'arrow-down'}/>}
                         disableElevation
-                        onClick={handleSubscribe}
+                        onClick={openSubMenu}
                 >
                     <Typography variant='h6' color='text.primary'>Subscribed</Typography>
                 </Button>
                 <Button sx={{
-                            display:isSubscribed ? 'none' : 'block',
+                            display:state.isSubscribed ? 'none' : 'block',
                             px:2,
                             '&.MuiButtonBase-root':{borderRadius:'50vh'}, 
                             backgroundColor:'common.black', 
@@ -67,8 +166,9 @@ export default function VideoActions() {
                             }}
                             startIcon={<YoutubeIcon name={'support'}/>}
                             disableElevation
+                            onClick={increaseLikes}
                     >
-                        <Typography variant='h6' color='text.primary'>512</Typography> 
+                        <Typography variant='h6' color='text.primary'>{state.likes}</Typography> 
                     </Button>
                 </Tooltip>
                 <Tooltip title='I dislike this' placement='bottom'>
@@ -79,6 +179,7 @@ export default function VideoActions() {
                             }}
                             endIcon={<YoutubeIcon name={'support-no'}/>}
                             disableElevation
+                            onClick={decreaseLikes}
                     >
                         <Typography variant='h6' color='text.primary' sx={{textIndent: '-9999px' }}>xxx</Typography> 
                     </Button>
@@ -116,20 +217,104 @@ export default function VideoActions() {
                             '&.MuiButtonBase-root':{ borderRadius:'50vh'},
                             ml:1,
                         }}
-                        disableElevation>
+                        id='report-button'
+                        aria-controls={isReportMenuOpen ? 'report-menu' : undefined}
+                        aria-haspopup="true"
+                        aria-expanded={isReportMenuOpen ? 'true' : undefined}
+                        disableElevation
+                        onClick={openReportMenu}>
                 <YoutubeIcon name='more'/>
             </IconButton>  
         </Box>
         <Snackbar sx={{'&.MuiSnackbar-root .MuiSnackbarContent-root': {minWidth:'100px', width:'fit-content', fontSize:'1.2em'}}}
-            open={openSnackbar}
+            open={state.openSubSnackbar}
             autoHideDuration={2000}
-            onClose={closeSnackbar}
+            onClose={closeSubSnackbar}
             message="Subscribed successfully"
             TransitionComponent={SlideTransition}
             key={SlideTransition.name}
         >
-
         </Snackbar>
+        <Snackbar sx={{'&.MuiSnackbar-root .MuiSnackbarContent-root': {minWidth:'100px', width:'fit-content', fontSize:'1.2em'}}}
+            open={state.openUnsubSnackbar}
+            autoHideDuration={2000}
+            onClose={closeUnsubSnackbar}
+            message="Unsubscribed successfully"
+            TransitionComponent={SlideTransition}
+            key={SlideTransition.name}
+        >
+        </Snackbar>
+        <Menu 
+                id="sub-menu"
+                anchorEl={state.anchorSub}
+                open={isSubMenuOpen}
+                onClose={closeSubMenu}
+                sx={{mt:1}}
+                MenuListProps={{
+                    'aria-labelledby': 'sub-button',
+                }}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}>
+                <YoutubeMenuItem disableRipple={true} onClick={(e) => handleSubIndex(e, 0)}>
+                    <ListItemIcon>
+                        <YoutubeIcon name={'tongzhi-fill'}/>
+                    </ListItemIcon>
+                    <ListItemText>All</ListItemText>
+                </YoutubeMenuItem>
+                <YoutubeMenuItem disableRipple={true} onClick={(e) => handleSubIndex(e, 1)}>
+                    <ListItemIcon>
+                        <YoutubeIcon name={'tongzhi'}/>
+                    </ListItemIcon>
+                    <ListItemText>Personalized</ListItemText>
+                </YoutubeMenuItem>
+                <YoutubeMenuItem disableRipple={true} onClick={(e) => handleSubIndex(e, 2)}>
+                    <ListItemIcon>
+                        <YoutubeIcon name={'tongzhi-no'}/>
+                    </ListItemIcon>
+                    <ListItemText>None</ListItemText>
+                </YoutubeMenuItem>
+                <YoutubeMenuItem disableRipple={true} onClick={openUnsubscribeDialog}>
+                    <ListItemIcon>
+                        <YoutubeIcon name={'unreg'}/>
+                    </ListItemIcon>
+                    <ListItemText>Unsubscribe</ListItemText>
+                </YoutubeMenuItem>
+        </Menu>
+        <Menu
+                id="report-menu"
+                anchorEl={state.anchorReport}
+                open={isReportMenuOpen}
+                onClose={closeReportMenu}
+                sx={{mt:1}}
+                MenuListProps={{
+                    'aria-labelledby': 'report-button',
+                }}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                  }}>
+                <YoutubeMenuItem disableRipple={true} onClick={closeReportMenu}>
+                    <ListItemIcon>
+                        <YoutubeIcon name={'report'}/>
+                    </ListItemIcon>
+                    <ListItemText>Report</ListItemText>
+                </YoutubeMenuItem>
+                <YoutubeMenuItem disableRipple={true} onClick={closeReportMenu}>
+                    <ListItemIcon>
+                        <YoutubeIcon name={'script'}/>
+                    </ListItemIcon>
+                    <ListItemText>Show transcript</ListItemText>
+                </YoutubeMenuItem>
+        </Menu>
+        <UnSubscribeDialog
+            open={state.isUnSubscribeDialogOpen}
+            onClose={handleCloseUnSubscribeDialog}
+            onUnsubscribe={handleUnsubscribe}
+            from={'Janessa Tech'}
+        />
+        
     </Box>
   )
 }
