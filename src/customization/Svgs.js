@@ -28,7 +28,11 @@ const svgMapping = new Map([
   ['save','imgs/save.svg'],
   ['more', 'imgs/more.svg'],
   ['report', 'imgs/popups/report.svg'],
-  ['script', 'imgs/popups/script.svg']
+  ['script', 'imgs/popups/script.svg'],
+  ['sort', 'imgs/sort.svg'],
+  ['emoji', 'imgs/emoji.svg'],
+  ['triangle-down', 'imgs/triangle-down.svg'],
+  ['triangle-up', 'imgs/triangle-up.svg']
 ])
 
 function generateIcon(src, size) {

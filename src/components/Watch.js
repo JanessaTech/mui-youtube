@@ -7,9 +7,8 @@ import Header from './Header'
 import FullMenu from './FullMenu'
 import { YoutubeDrawer } from '../common/YoutubeDrawer'
 import { headerHeight} from '../common/Constants'
-import Masonry from 'react-masonry-css'
 import VideoInPlay from './VideoInPlay'
-import Comments from './Comments'
+import Comments from './comment/Comments'
 import RecommendIn from './RecommendIn'
 import RecommendOut from './RecommendOut'
 
@@ -54,14 +53,13 @@ export default function Watch() {
         <YoutubeDrawer open={drawerOpen} onClose={closeDrawer}>
           <FullMenu isHome={false} open={true} toggleMenu={toggleMenu} isInDrawer={true}></FullMenu>
         </YoutubeDrawer>
-        <Box sx={{width:1, height: 800, marginTop:`${headerHeight}px`, display:'flex', justifyContent:'space-between'}}>
+        <Box sx={{width:1, mb:3, marginTop:`${headerHeight}px`, display:'flex', justifyContent:'space-between'}}>
             <Box sx={{width:{xs:1, sm:1, md:1, lg:0.7, xl:0.7}}}>
               <VideoInPlay/>
               <RecommendIn/>
               <Comments/>
             </Box>
             <RecommendOut/>
-            
         </Box>
       </Box>
     </Container>
