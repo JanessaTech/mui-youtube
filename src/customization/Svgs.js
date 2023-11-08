@@ -27,12 +27,17 @@ const svgMapping = new Map([
   ['share','imgs/share.svg'],
   ['save','imgs/save.svg'],
   ['more', 'imgs/more.svg'],
-  ['report', 'imgs/popups/report.svg'],
-  ['script', 'imgs/popups/script.svg'],
   ['sort', 'imgs/sort.svg'],
   ['emoji', 'imgs/emoji.svg'],
   ['triangle-down', 'imgs/triangle-down.svg'],
-  ['triangle-up', 'imgs/triangle-up.svg']
+  ['triangle-up', 'imgs/triangle-up.svg'],
+  ['add-to-list', 'imgs/popups/add-to-list.svg'],
+  ['watch', 'imgs/popups/watch.svg'],
+  ['category-add', 'imgs/popups/category-add.svg'],
+  ['no-interest', 'imgs/popups/no-interest.svg'],
+  ['no-recommd', 'imgs/popups/no-recommd.svg'],
+  ['report', 'imgs/popups/report.svg'],
+  ['script', 'imgs/popups/script.svg']
 ])
 
 function generateIcon(src, size) {
