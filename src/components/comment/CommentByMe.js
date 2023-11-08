@@ -3,15 +3,15 @@ import React from 'react'
 import { YoutubeIcon } from '../../customization/Svgs'
 import { alpha } from '@mui/material/styles';
 
-export default function CommentByMe({mode, toggleReplyme}) {
+export default function CommentByMe({level, toggleReplyme}) {
     const [state, setState] = React.useState({
         comment: '',
         cancled: false,
-        mode: mode,
+        level: level,
         showBut: false
     })
-    const leftMargin = state.mode === 'comment'? 70 : 40
-    const profileSize = state.mode === 'comment'? 50 : 30
+    const leftMargin = level === 1 ? 70 : 40;
+    const profileSize = level === 1 ? 50 : 30;
 
     const handleChange = (e) => {
         e.preventDefault()
@@ -62,7 +62,7 @@ export default function CommentByMe({mode, toggleReplyme}) {
                             }}
                             disabled={!state.comment}
                             >
-                        <Typography variant='h6' color='inherit'>{state.mode === 'comment' ? 'Comment' : 'Reply'}</Typography>        
+                        <Typography variant='h6' color='inherit'>{ level === 1 ? 'Comment' : 'Reply'}</Typography>        
                     </Button>
                 </Box>
             </Box>

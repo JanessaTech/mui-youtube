@@ -4,7 +4,7 @@ import React from 'react'
 import { YoutubeIcon } from '../../customization/Svgs'
 import CommentByMe from './CommentByMe'
 
-function ShowReplies({commentedBy}) {
+function ShowReplies({commentedBy, level}) {
     const [state, setState] = React.useState({showReply: false})
     const toggleShowReply = () => {
         setState({...state, showReply: !state.showReply})
@@ -24,7 +24,7 @@ function ShowReplies({commentedBy}) {
             </Button>
             <Collapse in={state.showReply} timeout="auto" unmountOnExit>
                     {
-                        commentedBy.map((comment) => (<OneComment mode={'reply'} {...comment}/>))
+                        commentedBy.map((comment) => (<OneComment level={level} {...comment}/>))
                     }
             </Collapse>
         </Box>)
@@ -32,20 +32,20 @@ function ShowReplies({commentedBy}) {
     return <Box></Box>
 }
 
-export default function OneComment({mode, from, days, profile, comment, likes, dislikes, commentedBy}) {
+export default function OneComment({level, from, days, profile, comment, likes, dislikes, commentedBy}) {
     const [state, setState] = React.useState({
-        mode: mode,
+        level: level,
         replyMeVisible: false
     })
-    const leftMargin = state.mode === 'comment'? 70 : 40
-    const profileSize = state.mode === 'comment'? 50 : 30
+    const leftMargin = state.level === 1 ? 70 : 40
+    const profileSize = state.level === 1 ? 50 : 30
 
     
     const toggleReplyme = () => {
         setState({...state, replyMeVisible: !state.replyMeVisible})
     }
   return (
-    <Box sx={{my: state.mode === 'comment'? 4 : 1, color: 'text.primary', display:'flex'}}>
+    <Box sx={{my: state.level === 1 ? 4 : 1, color: 'text.primary', display:'flex'}}>
         <Box sx={{width: leftMargin}}>
             <IconButton sx={{p:0}}>
                     <Avatar sx={{ width: profileSize, height: profileSize }} alt={from} src={profile}/>
@@ -70,12 +70,14 @@ export default function OneComment({mode, from, days, profile, comment, likes, d
                     <YoutubeIcon name={'support-no'} size={25}/>
                 </IconButton>
                 <Typography variant='body2'>{dislikes}</Typography>
+                { level < 3 && 
                 <Button sx={{textTransform:'none', borderRadius:'50vh', ml:2}} onClick={toggleReplyme}>
                     <Typography variant='body2' sx={{color:'black', fontWeight:'bold'}}>Reply</Typography>
-                </Button>
+                </Button>}
+                
             </Box>
-            {state.replyMeVisible && <CommentByMe mode={'reply'} toggleReplyme={toggleReplyme}/>}
-            <ShowReplies commentedBy={commentedBy}/>
+            {state.replyMeVisible && level < 3 && <CommentByMe level={ state.level + 1} toggleReplyme={toggleReplyme}/>}
+            {level < 3 && <ShowReplies commentedBy={commentedBy} level={ state.level + 1}/>}
         </Box>
     </Box>
   )

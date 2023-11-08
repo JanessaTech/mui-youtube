@@ -68,9 +68,9 @@ export default function Comments() {
           </Button>
         </Tooltip>
       </Box>
-      <CommentByMe mode={'comment'}/>
+      <CommentByMe level={1}/>
       {
-        comments.map( (comment) => (<OneComment mode={'comment'} {...comment}/>))
+        comments.map( (comment) => (<OneComment level={1} {...comment}/>))
       }
     </Box>
   )
