@@ -13,6 +13,7 @@ export var mockVideos = [
 export var videos = [
     {
         id: 0, 
+        recommendTo:1, // who the video will be recommended to
         key:'Javascript algorithm', 
         labels:[],
         url: 'watch', 
@@ -20,7 +21,7 @@ export var videos = [
         authorId: 2, 
         title: "Javascript algorithm", 
         likes: 10,
-        dislikes:0,
+        dislikes:1,
         views:'1.5K views', 
         days:'5 days ago'
     }
@@ -33,8 +34,9 @@ export var youtubers = [
         img_profile: 'imgs/prof.png',
         notifications: 5,
         libs: ['FullStack Dev', 'Web3.0 Dev', 'Ethereum'], 
-        subscriptions:[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15],
-        subscribers:[],
+        subscriptions:[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], // who the youtuber is following
+        subscribers:[], // who are following the youtuber
+        subIndex:1, // the index of the options when being subscribed which are: 'tongzhi-fill','tongzhi', 'tongzhi-no', 'unreg'
         tabs:['Web3.0', 'Ethereum', 'Security', 'Blockchain', 'EVM'],
         historyKeyWords: ['Javascript algorithm', 'tailwind css tutorial', 'defi dapp', 'React js tips and tricks', 'web3.0 fullstack developer']
     },
@@ -46,6 +48,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -57,6 +60,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -68,6 +72,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -79,6 +84,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -90,6 +96,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -101,6 +108,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -112,6 +120,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -123,6 +132,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -134,6 +144,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -145,6 +156,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -156,6 +168,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -167,6 +180,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -178,6 +192,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -189,17 +204,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
-        tabs:[],
-        historyKeyWords: []
-    },
-    {
-        id: 15,
-        notifications: 5,
-        name: 'Janessa Tech15',
-        img_profile: 'imgs/prof.png',
-        libs: [], 
-        subscriptions:[],
-        subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -211,6 +216,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -222,6 +228,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -233,6 +240,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -244,6 +252,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -255,6 +264,7 @@ export var youtubers = [
         libs: [], 
         subscriptions:[],
         subscribers:[1],
+        subIndex:2,
         tabs:[],
         historyKeyWords: []
     },
@@ -264,7 +274,7 @@ export var youtubers = [
 export var comments = [
     {
         id:1,  // comment id
-        vedioId:1, // the video id which the comment is left on
+        vedioId:0, // the video id which the comment is left on
         from: 16,   // the id of the youtuber who left the comment
         days: '5 days ago',  // when the comment happened
         comment:'Anytime I come here, I leave inspired and motivated. The universe brought you into my life. And I\'ve been learning since, hoping to find myself. May God bless you JanessaTech.',
@@ -275,7 +285,7 @@ export var comments = [
     },
     {
         id:2,
-        vedioId:1,
+        vedioId:0,
         from: 20,
         days: '6 days ago',
         comment:'Beautiful lovey words.. Finding meaning is the key in every communication.. and not following the lessons from failure...another key..',
@@ -286,7 +296,7 @@ export var comments = [
     },
     {
         id:3,
-        vedioId:1,
+        vedioId:undefined,
         from: 17,
         days: '4 days ago',
         comment: 'A profound message succinctly put. Has it occurred to you, though, JanessaTech, the meaning we\'ve to search for could be common to us all. Just picked up Michael Newton\'s, "Life between Lives - Hypnotherapy for Spiritual Regression." Have you ever read any of his stuff? e.g. Journey of Souls, and Destiny of Souls.',
@@ -297,6 +307,7 @@ export var comments = [
     },
     {
         id:4,
+        vedioId:undefined,
         from: 19,
         days: '7 days ago',
         comment: 'Thank you, that was very thought provoking and insightful.',
@@ -307,6 +318,7 @@ export var comments = [
     },
     {
         id:5,
+        vedioId:undefined,
         from: 18,
         days: '3 days ago',
         comment: 'This was amazing JanessaTech, the point on reciprocity was outstanding, really fantastic advice',

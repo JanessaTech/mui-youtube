@@ -3,14 +3,19 @@ import { Box } from '@mui/system'
 import React from 'react'
 import { YoutubeIcon } from '../../customization/Svgs'
 import CommentByMe from './CommentByMe'
+import {GetYoutuberInfo, GetCommentsByCommentIds} from '../../data/MockRestfuls'
 
 function ShowReplies({commentedBy, level}) {
-    const [state, setState] = React.useState({showReply: false})
+    const [state, setState] = React.useState(
+        {
+            showReply: false,
+            comments: GetCommentsByCommentIds(commentedBy)
+        })
     const toggleShowReply = () => {
         setState({...state, showReply: !state.showReply})
     }
 
-    if (commentedBy && commentedBy.length > 0) {
+    if (state.comments && state.comments.length > 0) {
         return (
         <Box>
             <Button sx={{textTransform:'none', borderRadius:'50vh',
@@ -20,11 +25,11 @@ function ShowReplies({commentedBy, level}) {
                     startIcon={<YoutubeIcon name={state.showReply ? 'triangle-down' : 'triangle-up'} size={20}/>}
                     onClick={toggleShowReply}
                 >
-                    <Typography variant='body2' sx={{color:'black', fontWeight:'bold'}}>{commentedBy.length} replies</Typography>
+                    <Typography variant='body2' sx={{color:'black', fontWeight:'bold'}}>{state.comments.length } replies</Typography>
             </Button>
             <Collapse in={state.showReply} timeout="auto" unmountOnExit>
                     {
-                        commentedBy.map((comment) => (<OneComment level={level} {...comment}/>))
+                        state.comments.map((comment) => (<OneComment key={comment.id} level={level} {...comment}/>))
                     }
             </Collapse>
         </Box>)
@@ -32,10 +37,11 @@ function ShowReplies({commentedBy, level}) {
     return <Box></Box>
 }
 
-export default function OneComment({level, from, days, profile, comment, likes, dislikes, commentedBy}) {
+export default function OneComment({level, from, days, comment, likes, dislikes, commentedBy}) {
     const [state, setState] = React.useState({
         level: level,
-        replyMeVisible: false
+        replyMeVisible: false,
+        youtuber: GetYoutuberInfo(from)
     })
     const leftMargin = state.level === 1 ? 70 : 40
     const profileSize = state.level === 1 ? 50 : 30
@@ -48,7 +54,7 @@ export default function OneComment({level, from, days, profile, comment, likes, 
     <Box sx={{my: state.level === 1 ? 4 : 1, color: 'text.primary', display:'flex'}}>
         <Box sx={{width: leftMargin}}>
             <IconButton sx={{p:0}}>
-                    <Avatar sx={{ width: profileSize, height: profileSize }} alt={from} src={profile}/>
+                    <Avatar sx={{ width: profileSize, height: profileSize }} alt={state.youtuber?.name} src={state.youtuber?.img_profile}/>
             </IconButton>
         </Box>
         <Box sx={{width:`calc(100% - ${leftMargin}px)`}}>

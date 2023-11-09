@@ -1,9 +1,10 @@
 import { Avatar, Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, IconButton, ListItemIcon, ListItemText, Menu, Snackbar, Tooltip, Typography } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { YoutubeIcon } from '../customization/Svgs'
 import Slide from '@mui/material/Slide';
 import PropTypes from 'prop-types';
 import {YoutubeMenuItem} from '../customization/YoutubeStyling'
+import {GetYoutuberInfo} from '../data/MockRestfuls'
 
 function SlideTransition(props) {
     return <Slide {...props} direction="up" />;
@@ -24,7 +25,7 @@ function UnSubscribeDialog(props) {
             >
                 <DialogContent>
                     <DialogContentText id="unSubscribe-dialog-description">
-                        <Typography variant='h6'>Unsubscribe from {from}?</Typography>   
+                        <Typography variant='h6'>Unsubscribe from <span style={{color: 'black'}}>{from}</span>?</Typography>   
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions sx={{justifyContent:'center'}}>
@@ -51,20 +52,34 @@ UnSubscribeDialog.propTypes = {
     from: PropTypes.string.isRequired
 }
 
-export default function VideoActions() {
+export default function VideoActions({video}) {
     const subOptions = [ 'tongzhi-fill','tongzhi', 'tongzhi-no', 'unreg']
     const [state, setState] = React.useState(
         {
-            subIndex : 1,
+            subIndex : 1,  // default value
             isSubscribed: false,
             openSubSnackbar: false,
             openUnsubSnackbar: false,
             anchorSub: null,
             anchorReport: null,
             isUnSubscribeDialogOpen: false, 
-            likes: 555
+            likes: video?.likes,
+            dislikes: video?.dislikes,
+            author: undefined
         }
     )
+    useEffect(() => {
+        const youtuber = GetYoutuberInfo(video?.authorId)
+        const me = parseInt(localStorage.getItem('user'))
+        setState(
+            {...state, 
+            subIndex: youtuber?.subIndex,
+            likes: video?.likes,
+            dislikes: video?.dislikes, 
+            author: youtuber,
+            isSubscribed: !!youtuber?.subscribers.includes(me)      
+            })
+    }, [video])
    
     const isSubMenuOpen = Boolean(state.anchorSub)
     const isReportMenuOpen = Boolean(state.anchorReport);
@@ -110,19 +125,19 @@ export default function VideoActions() {
         setState({...state, likes: state.likes + 1})
     }
     const decreaseLikes = () => {
-        setState({...state, likes: state.likes > 0 ? state.likes - 1 : 0})
+        setState({...state, dislikes: state.dislikes > 0 ? state.dislikes - 1 : 0})
     }
   return (
     <Box sx={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', my:1}}>
         <Box sx={{display:'flex', alignItems:'center'}}>
             <IconButton sx={{p:0}} href='me'>
-                <Avatar sx={{ width: 50, height: 50 }} alt="Janessa Tech" src="imgs/prof.png"/>
+                <Avatar sx={{ width: 50, height: 50 }} alt={state.author?.name} src={state.author?.img_profile}/>
             </IconButton>
             <Box sx={{ml:1, mr:1}}>
-                <Tooltip title={'Janessa Tech xxxxxxxxxx'} placement="top-start" >
-                    <Typography variant='h6' sx={{textOverflow: 'ellipsis', overflow: 'hidden', width:100, whiteSpace:'nowrap'}}>Janessa Tech xxxxxxxxxx</Typography>
+                <Tooltip title={state.author?.name} placement="top-start" >
+                    <Typography variant='h6' sx={{textOverflow: 'ellipsis', overflow: 'hidden', width:100, whiteSpace:'nowrap'}}>{state.author?.name}</Typography>
                 </Tooltip>
-                <Typography sx={{whiteSpace:'nowrap'}} variant='body2' color="text.secondary">4.83M subscribers</Typography>
+                <Typography sx={{whiteSpace:'nowrap'}} variant='body2' color="text.secondary">{state.author?.subscribers?.length} subscriber(s)</Typography>
             </Box>
             <Box>
                 <Button 
@@ -158,7 +173,7 @@ export default function VideoActions() {
         </Box>
 
         <Box sx={{display:'flex', alignItems:'center'}}>
-            <Box sx={{width:162}}>
+            <Box sx={{display:'flex', alignItems:'center'}}>
                 <Tooltip title='I like this' placement='bottom'>
                     <Button sx={{
                                 '&.MuiButtonBase-root':{ borderRadius:'50vh 0 0 50vh'},
@@ -168,7 +183,7 @@ export default function VideoActions() {
                             disableElevation
                             onClick={increaseLikes}
                     >
-                        <Typography variant='h6' color='text.primary'>{state.likes}</Typography> 
+                        <Typography variant='h6' color='text.primary'>{state.likes ? state.likes : 0}</Typography> 
                     </Button>
                 </Tooltip>
                 <Tooltip title='I dislike this' placement='bottom'>
@@ -181,7 +196,7 @@ export default function VideoActions() {
                             disableElevation
                             onClick={decreaseLikes}
                     >
-                        <Typography variant='h6' color='text.primary' sx={{textIndent: '-9999px' }}>xxx</Typography> 
+                        <Typography variant='h6' color='text.primary'>{state.dislikes ? state.dislikes : 0}</Typography> 
                     </Button>
                 </Tooltip>
                 
@@ -232,7 +247,7 @@ export default function VideoActions() {
             onClose={closeSubSnackbar}
             message="Subscribed successfully"
             TransitionComponent={SlideTransition}
-            key={SlideTransition.name}
+            key={`${SlideTransition.name}-sub`}
         >
         </Snackbar>
         <Snackbar sx={{'&.MuiSnackbar-root .MuiSnackbarContent-root': {minWidth:'100px', width:'fit-content', fontSize:'1.2em'}}}
@@ -241,7 +256,7 @@ export default function VideoActions() {
             onClose={closeUnsubSnackbar}
             message="Unsubscribed successfully"
             TransitionComponent={SlideTransition}
-            key={SlideTransition.name}
+            key={`${SlideTransition.name}-unsub`}
         >
         </Snackbar>
         <Menu 
@@ -312,9 +327,8 @@ export default function VideoActions() {
             open={state.isUnSubscribeDialogOpen}
             onClose={handleCloseUnSubscribeDialog}
             onUnsubscribe={handleUnsubscribe}
-            from={'Janessa Tech'}
-        />
-        
+            from={state.author?.name}
+        />      
     </Box>
   )
 }

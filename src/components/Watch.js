@@ -11,20 +11,16 @@ import VideoInPlay from './VideoInPlay'
 import Comments from './comment/Comments'
 import RecommendIn from './RecommendIn'
 import RecommendOut from './RecommendOut'
+import { useSearchParams } from "react-router-dom";
 
-
-
-const breakpointColumnsObj = {
-  1536: 2,
-  1200: 1
-};
 
 export default function Watch() {
   const theme = useTheme();
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const [isLargeMenu, setIsLargeMenu] = React.useState(isLargeScreen)
   const [drawerOpen, setDrawerOpen] = React.useState(false)
-
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [vid, setVid] = React.useState(parseInt(searchParams.get('vid')))
   useEffect(() => {
     setIsLargeMenu(isLargeScreen)
     if(isLargeScreen) {
@@ -55,9 +51,9 @@ export default function Watch() {
         </YoutubeDrawer>
         <Box sx={{width:1, mb:3, marginTop:`${headerHeight}px`, display:'flex', justifyContent:'space-between'}}>
             <Box sx={{width:{xs:1, sm:1, md:1, lg:0.7, xl:0.7}}}>
-              <VideoInPlay/>
+              <VideoInPlay vid={vid}/>
               <RecommendIn/>
-              <Comments/>
+              <Comments vid={vid}/>
             </Box>
             <RecommendOut/>
         </Box>

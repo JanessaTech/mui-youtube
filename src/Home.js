@@ -7,8 +7,8 @@ import useMediaQuery from '@mui/material/useMediaQuery';
 import Header from './components/Header';
 import Main from './components/Main';
 import { YoutubeDrawer } from './common/YoutubeDrawer';
-import {mockVideos} from './data/Videos'
 import { useSearchParams } from "react-router-dom";
+import {GetRecommendedVideos} from './data/MockRestfuls'
 
 export default function Home() {
 
@@ -22,9 +22,13 @@ export default function Home() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   useEffect(() => {
+    localStorage.setItem('user', '1')  // set default user id to skip login logic
+  }, [])
+
+  useEffect(() => {
     // mock the functionalities of restful calling to fetch video by search_query
     const search = searchParams.get('search_query')
-    setVideos(search ? mockVideos.filter((v) => {return v.key === search}) : mockVideos)
+    setVideos(GetRecommendedVideos(parseInt(localStorage.getItem('user')), search))
   }, [searchParams])
 
   useEffect(() => {

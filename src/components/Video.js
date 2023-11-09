@@ -28,7 +28,7 @@ export default function Video({id, url, videoSrc, author, img_profile, title, vi
 
   return (
     <Card sx={{width:1, backgroundColor:'inherit', pb:{xs:3, sm:0}}} elevation={0}>
-        <Link href={url}>
+        <Link href={`${url}?vid=${id}`}>
             <CardMedia 
                     sx={{borderRadius:3}}
                     component='video' 
@@ -46,7 +46,7 @@ export default function Video({id, url, videoSrc, author, img_profile, title, vi
                         </IconButton>
                     </Box>
                     <Box>
-                        <Link href={url}>
+                        <Link href={`${url}?vid=${id}`}>
                             <Typography variant="h6">{title}</Typography>
                             <Tooltip title={author} placement="top-start" >
                                 <Typography color="text.secondary">{author}</Typography>
