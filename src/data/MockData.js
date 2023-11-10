@@ -37,7 +37,7 @@ export var youtubers = [
         subscriptions:[2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15], // who the youtuber is following
         subscribers:[], // who are following the youtuber
         subIndex:1, // the index of the options when being subscribed which are: 'tongzhi-fill','tongzhi', 'tongzhi-no', 'unreg'
-        tabs:['Web3.0', 'Ethereum', 'Security', 'Blockchain', 'EVM'],
+        tabs:['All', 'Web3.0', 'Ethereum', 'Security', 'Blockchain', 'EVM', 'ZZ'],
         historyKeyWords: ['Javascript algorithm', 'tailwind css tutorial', 'defi dapp', 'React js tips and tricks', 'web3.0 fullstack developer']
     },
     {
@@ -281,7 +281,6 @@ export var comments = [
         likes:33,  // the likes
         dislikes:1,  // the dislikes
         commentedBy: [3, 4],  // the list of comment ids
-        isReply: false // an indicator if the comment is a comment made on top of video rather than a reply on top of an existing comment
     },
     {
         id:2,
@@ -291,8 +290,7 @@ export var comments = [
         comment:'Beautiful lovey words.. Finding meaning is the key in every communication.. and not following the lessons from failure...another key..',
         likes:15,
         dislikes:1,
-        commentedBy: undefined,
-        isReply: false
+        commentedBy: undefined
     },
     {
         id:3,
@@ -302,8 +300,7 @@ export var comments = [
         comment: 'A profound message succinctly put. Has it occurred to you, though, JanessaTech, the meaning we\'ve to search for could be common to us all. Just picked up Michael Newton\'s, "Life between Lives - Hypnotherapy for Spiritual Regression." Have you ever read any of his stuff? e.g. Journey of Souls, and Destiny of Souls.',
         likes:50,
         dislikes:1,
-        commentedBy: [5],
-        isReply: true
+        commentedBy: [5]
     },
     {
         id:4,
@@ -313,8 +310,7 @@ export var comments = [
         comment: 'Thank you, that was very thought provoking and insightful.',
         likes:45,
         dislikes:1,
-        commentedBy: undefined,
-        isReply: true
+        commentedBy: undefined
     },
     {
         id:5,
@@ -324,8 +320,7 @@ export var comments = [
         comment: 'This was amazing JanessaTech, the point on reciprocity was outstanding, really fantastic advice',
         likes:17,
         dislikes:1,
-        commentedBy: undefined,
-        isReply: true
+        commentedBy: undefined
       }
   ]
 

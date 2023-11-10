@@ -6,10 +6,12 @@ import {IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, 
 import { YoutubeIcon } from '../customization/Svgs';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { forwardRef } from 'react';
+import {GetHistoryKeyWords} from '../data/MockRestfuls'
 
 const HeaderSearchHis = forwardRef(({isShow, setKeyword}, ref) => { 
   const theme = useTheme();
-  const [mockHist, setMockHist] = React.useState(['Javascript algorithm', 'tailwind css tutorial', 'defi dapp', 'React js tips and tricks', 'web3.0 fullstack developer'])
+  const me = parseInt(localStorage.getItem('user'))
+  const [mockHist, setMockHist] = React.useState(GetHistoryKeyWords(me))
 
   const handleRemove = (e, index) => {
     e.preventDefault()

@@ -8,7 +8,7 @@ export default function VideoInPlay({vid}) {
   const [video, setVideo] = React.useState({})
   useEffect(() => {
     setVideo(GetVideoDetails(vid))
-  },[])
+  },[vid])
 
   return (
     <Box sx={{width:1}}>

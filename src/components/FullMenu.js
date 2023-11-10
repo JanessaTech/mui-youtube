@@ -4,6 +4,7 @@ import Burger from './Burger';
 import {fullDrawerWidth, headerHeight} from '../common/Constants'
 import {YoutubeMenuList} from '../customization/YoutubeStyling'
 import {YoutubeIcon} from '../customization/Svgs'
+import {GetYoutuberInfo, GetSubscriptions} from '../data/MockRestfuls'
 
 function capitalize(s)
 {
@@ -11,8 +12,11 @@ function capitalize(s)
 }
 
 export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
+  const meId = parseInt(localStorage.getItem('user'))
   const [showLibMore, setShowLibMore] = React.useState(true)
   const [showSubMore, setShowSubMore] = React.useState(true)
+  const [me, setMe] = React.useState(GetYoutuberInfo(meId))
+  const [subscriptions, setSubscriptions] = React.useState(GetSubscriptions(meId))
 
   const toggleShowLibMore = (e) => {
     e.preventDefault();
@@ -58,7 +62,7 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
           </ListItemButton>
         </ListItem> 
         <Collapse in={!showLibMore} timeout="auto" unmountOnExit>
-          {['FullStack Dev', 'Web3.0 Dev', 'Ethereum'].map((text, index) => (
+          {me.libs.map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
@@ -81,13 +85,13 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
       <Divider />
       <YoutubeMenuList>
         <ListSubheader sx={{backgroundColor:'inherit', fontSize:'1.2em', color: '#4b4b4b'}}>Subscriptions</ListSubheader>
-        {new Array(5).fill('Janessa Tech').map((text, index) => (
-          <ListItem key={index} disablePadding>
+        {subscriptions.slice(0,5).map((youtuber) => (
+          <ListItem key={youtuber.id} disablePadding>
             <ListItemButton >
               <ListItemAvatar>
-                <Avatar sx={{ width: 35, height: 35 }} alt="Janessa Tech" src="imgs/prof.png" />
+                <Avatar sx={{ width: 35, height: 35 }} alt={youtuber.name} src={youtuber.img_profile} />
               </ListItemAvatar>
-              <ListItemText key={index} primary={text} />
+              <ListItemText key={youtuber.id} primary={youtuber.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -100,13 +104,13 @@ export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
           </ListItemButton>
         </ListItem> 
         <Collapse in={!showSubMore} timeout="auto" unmountOnExit>
-            {new Array(20).fill('Janessa Tech').map((text, index) => (
-              <ListItem key={text} disablePadding>
+            {subscriptions.slice(5).map((youtuber) => (
+              <ListItem key={youtuber.id} disablePadding>
                 <ListItemButton >
                   <ListItemAvatar>
-                    <Avatar sx={{ width: 35, height: 35 }} alt="Janessa Tech" src="imgs/prof.png" />
+                    <Avatar sx={{ width: 35, height: 35 }} alt={youtuber.name} src={youtuber.img_profile} />
                   </ListItemAvatar>
-                  <ListItemText primary={text} />
+                  <ListItemText primary={youtuber.name} />
                 </ListItemButton>
               </ListItem>
             ))}

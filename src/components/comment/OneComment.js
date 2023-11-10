@@ -1,11 +1,11 @@
 import { Avatar, Button, Collapse, IconButton, Typography } from '@mui/material'
 import { Box } from '@mui/system'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { YoutubeIcon } from '../../customization/Svgs'
 import CommentByMe from './CommentByMe'
 import {GetYoutuberInfo, GetCommentsByCommentIds} from '../../data/MockRestfuls'
 
-function ShowReplies({commentedBy, level}) {
+function ShowReplies({commentedBy, level, toggleTriggering}) {
     const [state, setState] = React.useState(
         {
             showReply: false,
@@ -14,6 +14,10 @@ function ShowReplies({commentedBy, level}) {
     const toggleShowReply = () => {
         setState({...state, showReply: !state.showReply})
     }
+
+    useEffect(() => {
+        setState({...state, comments: GetCommentsByCommentIds(commentedBy)})
+    }, [commentedBy ? commentedBy.toString() : commentedBy])
 
     if (state.comments && state.comments.length > 0) {
         return (
@@ -29,7 +33,7 @@ function ShowReplies({commentedBy, level}) {
             </Button>
             <Collapse in={state.showReply} timeout="auto" unmountOnExit>
                     {
-                        state.comments.map((comment) => (<OneComment key={comment.id} level={level} {...comment}/>))
+                        state.comments.map((comment) => (<OneComment key={comment.id} level={level} {...comment} toggleTriggering={toggleTriggering}/>))
                     }
             </Collapse>
         </Box>)
@@ -37,16 +41,30 @@ function ShowReplies({commentedBy, level}) {
     return <Box></Box>
 }
 
-export default function OneComment({level, from, days, comment, likes, dislikes, commentedBy}) {
+export default function OneComment({level, id, from, days, comment, likes, dislikes, commentedBy, toggleTriggering}) {
+    const meId = parseInt(localStorage.getItem('user'))
+
     const [state, setState] = React.useState({
         level: level,
         replyMeVisible: false,
+        likes: likes,
+        dislikes: dislikes,
         youtuber: GetYoutuberInfo(from)
     })
     const leftMargin = state.level === 1 ? 70 : 40
     const profileSize = state.level === 1 ? 50 : 30
 
-    
+    const increaseLikes = () => {
+        console.log('increaseLikes')
+        const newLikes = state.likes ? state.likes + 1 : 1
+        setState({...state, likes: newLikes})
+    }
+
+    const increaseDislikes = () => {
+        const newDislikes = state.dislikes ? state.dislikes + 1 : 1
+        setState({...state, dislikes: newDislikes})
+    }
+
     const toggleReplyme = () => {
         setState({...state, replyMeVisible: !state.replyMeVisible})
     }
@@ -59,7 +77,7 @@ export default function OneComment({level, from, days, comment, likes, dislikes,
         </Box>
         <Box sx={{width:`calc(100% - ${leftMargin}px)`}}>
             <Box sx={{display:'flex'}}>
-                <Typography sx={{mr:2}} color='black'>@{from}</Typography>
+                <Typography sx={{mr:2}} color='black'>@{state.youtuber.name}</Typography>
                 <Typography color={'text.secondary'}>{days}</Typography>
             </Box>
             <Box sx={{my:1}}>
@@ -68,22 +86,22 @@ export default function OneComment({level, from, days, comment, likes, dislikes,
                 </Typography>
             </Box>
             <Box sx={{display:'flex', alignItems:'center'}}>
-                <IconButton>
+                <IconButton onClick={increaseLikes}>
                     <YoutubeIcon name={'support'} size={25}/>
                 </IconButton>
-                <Typography variant='body2'>{likes}</Typography>
-                <IconButton sx={{ml:2}}>
+                <Typography variant='body2'>{state.likes}</Typography>
+                <IconButton sx={{ml:2}} onClick={increaseDislikes}>
                     <YoutubeIcon name={'support-no'} size={25}/>
                 </IconButton>
-                <Typography variant='body2'>{dislikes}</Typography>
-                { level < 3 && 
+                <Typography variant='body2'>{state.dislikes}</Typography>
+                { level < 3 && meId !== from &&
                 <Button sx={{textTransform:'none', borderRadius:'50vh', ml:2}} onClick={toggleReplyme}>
                     <Typography variant='body2' sx={{color:'black', fontWeight:'bold'}}>Reply</Typography>
                 </Button>}
                 
             </Box>
-            {state.replyMeVisible && level < 3 && <CommentByMe level={ state.level + 1} toggleReplyme={toggleReplyme}/>}
-            {level < 3 && <ShowReplies commentedBy={commentedBy} level={ state.level + 1}/>}
+            {state.replyMeVisible && level < 3 && <CommentByMe level={ state.level + 1} parentId={id} from={meId} toggleTriggering={toggleTriggering} toggleReplyme={toggleReplyme}/>}
+            {level < 3 && <ShowReplies commentedBy={commentedBy} level={ state.level + 1} toggleTriggering={toggleTriggering}/>}
         </Box>
     </Box>
   )

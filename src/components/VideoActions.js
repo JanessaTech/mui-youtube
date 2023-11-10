@@ -4,7 +4,7 @@ import { YoutubeIcon } from '../customization/Svgs'
 import Slide from '@mui/material/Slide';
 import PropTypes from 'prop-types';
 import {YoutubeMenuItem} from '../customization/YoutubeStyling'
-import {GetYoutuberInfo} from '../data/MockRestfuls'
+import {GetYoutuberInfo, Unsubscribe, Subscribe} from '../data/MockRestfuls'
 
 function SlideTransition(props) {
     return <Slide {...props} direction="up" />;
@@ -49,11 +49,13 @@ UnSubscribeDialog.propTypes = {
     open: PropTypes.bool.isRequired,
     onClose: PropTypes.func.isRequired,
     onUnsubscribe: PropTypes.func.isRequired,
-    from: PropTypes.string.isRequired
+    //from: PropTypes.string.isRequired
 }
 
 export default function VideoActions({video}) {
     const subOptions = [ 'tongzhi-fill','tongzhi', 'tongzhi-no', 'unreg']
+    const meId = parseInt(localStorage.getItem('user'))
+
     const [state, setState] = React.useState(
         {
             subIndex : 1,  // default value
@@ -65,28 +67,41 @@ export default function VideoActions({video}) {
             isUnSubscribeDialogOpen: false, 
             likes: video?.likes,
             dislikes: video?.dislikes,
-            author: undefined
+            author: undefined,
+            triggering: false
         }
     )
     useEffect(() => {
         const youtuber = GetYoutuberInfo(video?.authorId)
-        const me = parseInt(localStorage.getItem('user'))
         setState(
             {...state, 
             subIndex: youtuber?.subIndex,
             likes: video?.likes,
             dislikes: video?.dislikes, 
             author: youtuber,
-            isSubscribed: !!youtuber?.subscribers.includes(me)      
+            isSubscribed: !!youtuber?.subscribers.includes(meId)      
             })
     }, [video])
+
+    useEffect(() => {
+        const youtuber = GetYoutuberInfo(video?.authorId) // call mock restful
+        setState(
+            {...state, 
+            subIndex: youtuber?.subIndex,
+            likes: video?.likes,
+            dislikes: video?.dislikes, 
+            author: youtuber,
+            isSubscribed: !!youtuber?.subscribers.includes(meId)      
+            })
+    }, [state.triggering])
    
     const isSubMenuOpen = Boolean(state.anchorSub)
     const isReportMenuOpen = Boolean(state.anchorReport);
 
     const handleSubscribe = (e) => {
         e.preventDefault()
-        setState({...state, openSubSnackbar: true, isSubscribed: true})
+        Subscribe(video?.authorId, meId) // call mock restful
+        setState({...state, triggering: !state.triggering, openSubSnackbar: true, isSubscribed: true})
     }
     const handleSubIndex = (e, index) => {
         e.preventDefault()
@@ -96,7 +111,8 @@ export default function VideoActions({video}) {
         setState({...state, isUnSubscribeDialogOpen:false})
     }
     const handleUnsubscribe = () => {
-        setState({...state, isSubscribed: false, isUnSubscribeDialogOpen: false, openUnsubSnackbar: true})
+        Unsubscribe(video?.authorId, meId) // call mock restful
+        setState({...state, triggering: !state.triggering, isUnSubscribeDialogOpen: false, openUnsubSnackbar: true})
     }
     const openUnsubscribeDialog = (e) => {
         e.preventDefault()
@@ -124,8 +140,8 @@ export default function VideoActions({video}) {
     const increaseLikes = () => {
         setState({...state, likes: state.likes + 1})
     }
-    const decreaseLikes = () => {
-        setState({...state, dislikes: state.dislikes > 0 ? state.dislikes - 1 : 0})
+    const increaseDislikes = () => {
+        setState({...state, dislikes: state.dislikes + 1})
     }
   return (
     <Box sx={{display:'flex', justifyContent:'space-between', flexWrap:'wrap', my:1}}>
@@ -194,7 +210,7 @@ export default function VideoActions({video}) {
                             }}
                             endIcon={<YoutubeIcon name={'support-no'}/>}
                             disableElevation
-                            onClick={decreaseLikes}
+                            onClick={increaseDislikes}
                     >
                         <Typography variant='h6' color='text.primary'>{state.dislikes ? state.dislikes : 0}</Typography> 
                     </Button>

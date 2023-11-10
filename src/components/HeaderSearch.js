@@ -19,7 +19,10 @@ export default function HeaderSearch({isLargeScreen}) {
 
   useEffect(() => {
     const search = searchParams.get('search_query')
-    setSearch(search)
+    if (search) {
+      setSearch(search)
+      setClear(true)
+    }
   }, [searchParams])
   
   useEffect(() => {

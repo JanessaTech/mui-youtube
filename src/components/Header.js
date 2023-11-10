@@ -6,6 +6,8 @@ import HeaderSearch from './HeaderSearch';
 import HeaderOthers from './HeaderOthers';
 
 export default function Header({toggleMenu, isLargeScreen}) {
+  
+
   return (
     <AppBar sx={{position: 'fixed', top:0, left:0, height: headerHeight, background: '#f3f2f2'}} elevation={0}
             >
@@ -13,7 +15,7 @@ export default function Header({toggleMenu, isLargeScreen}) {
                     <Burger toggleMenu={toggleMenu}/>
                     <Box sx={{height:56, display:'flex', width: 0.78, ml:2, justifyContent: 'space-between'}}>
                       <HeaderSearch isLargeScreen={isLargeScreen}/>
-                      <HeaderOthers/>
+                      <HeaderOthers />
                     </Box>
               </Toolbar>             
     </AppBar>

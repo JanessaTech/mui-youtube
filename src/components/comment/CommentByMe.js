@@ -2,8 +2,9 @@ import { Avatar, Box, Button, IconButton, TextField, Typography } from '@mui/mat
 import React from 'react'
 import { YoutubeIcon } from '../../customization/Svgs'
 import { alpha } from '@mui/material/styles';
+import {SubmitComment} from '../../data/MockRestfuls'
 
-export default function CommentByMe({level, toggleReplyme}) {
+export default function CommentByMe({level, vid, parentId, from, toggleReplyme, toggleTriggering}) {
     const [state, setState] = React.useState({
         comment: '',
         cancled: false,
@@ -23,6 +24,12 @@ export default function CommentByMe({level, toggleReplyme}) {
     const handleCancel = () => {
         setState({...state, comment: '', showBut: false})
         toggleReplyme && toggleReplyme()
+    }
+
+    const submitNewComment = () => {
+        SubmitComment(vid, parentId, from, state.comment)
+        toggleTriggering()
+        setState({...state, comment:''})
     }
     
   return (
@@ -61,6 +68,7 @@ export default function CommentByMe({level, toggleReplyme}) {
                                 ml:1
                             }}
                             disabled={!state.comment}
+                            onClick={submitNewComment}
                             >
                         <Typography variant='h6' color='inherit'>{ level === 1 ? 'Comment' : 'Reply'}</Typography>        
                     </Button>

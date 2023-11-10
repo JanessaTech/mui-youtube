@@ -27,6 +27,9 @@ export default function Watch() {
       closeDrawer()
     }
   }, [isLargeScreen])
+  useEffect(() => {
+    setVid(parseInt(searchParams.get('vid')))
+  }, [searchParams.get('vid')])
 
   const closeDrawer = () => {
     setDrawerOpen(false)
