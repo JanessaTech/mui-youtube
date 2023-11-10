@@ -133,6 +133,7 @@ export function SubmitComment(vId, parentId, from, content) {
                 comments.unshift(comment)
             } else {
                 parentComment.commentedBy = [newCommentId]
+                comments.unshift(comment)
             }
         }
     } else {
