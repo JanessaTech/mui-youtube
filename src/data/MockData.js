@@ -24,6 +24,118 @@ export var videos = [
         dislikes:1,
         views:'1.5K views', 
         days:'5 days ago'
+    },
+    {
+        id: 2, 
+        recommendTo:1, // who the video will be recommended to
+        key:'tailwind css tutorial', 
+        labels:[],
+        url: 'watch', 
+        videoSrc: 'videos/20230529-210928.mp4', 
+        authorId: 2, 
+        title: "tailwind css tutorial", 
+        likes: 23,
+        dislikes:5,
+        views:'1K views', 
+        days:'25 days ago'
+    },
+    {
+        id: 3, 
+        recommendTo:1, // who the video will be recommended to
+        key:'defi dapp', 
+        labels:[],
+        url: 'watch', 
+        videoSrc: 'videos/20230529-210928.mp4', 
+        authorId: 2, 
+        title: "defi dapp1", 
+        likes: 223,
+        dislikes:15,
+        views:'48K views', 
+        days:'2 days ago'
+    },
+    {
+        id: 4, 
+        recommendTo:1, // who the video will be recommended to
+        key:'defi dapp', 
+        labels:[],
+        url: 'watch', 
+        videoSrc: 'videos/20230529-210928.mp4', 
+        authorId: 2, 
+        title: "defi dapp2", 
+        likes: 223,
+        dislikes:15,
+        views:'48K views', 
+        days:'3 days ago'
+    },
+    {
+        id: 5, 
+        recommendTo:1, // who the video will be recommended to
+        key:'React js tips and tricks', 
+        labels:[],
+        url: 'watch', 
+        videoSrc: 'videos/20230529-210928.mp4', 
+        authorId: 3, 
+        title: "React js tips and tricks1", 
+        likes: 677,
+        dislikes:5,
+        views:'22K views', 
+        days:'8 days ago'
+    },
+    {
+        id: 6, 
+        recommendTo:1, // who the video will be recommended to
+        key:'React js tips and tricks', 
+        labels:[],
+        url: 'watch', 
+        videoSrc: 'videos/20230529-210928.mp4', 
+        authorId: 3, 
+        title: "React js tips and tricks2", 
+        likes: 234,
+        dislikes:2,
+        views:'48K views', 
+        days:'9 days ago'
+    },
+    {
+        id: 7, 
+        recommendTo:1, // who the video will be recommended to
+        key:'web3.0 fullstack developer', 
+        labels:[],
+        url: 'watch', 
+        videoSrc: 'videos/20230529-210928.mp4', 
+        authorId: 4, 
+        title: "web3.0 fullstack developer", 
+        likes: 234,
+        dislikes:2,
+        views:'100K views', 
+        days:'22 days ago'
+    },
+    {
+        id: 8, 
+        recommendTo:1, // who the video will be recommended to
+        key:'web3.0 fullstack developer', 
+        labels:[],
+        url: 'watch', 
+        videoSrc: 'videos/20230529-210928.mp4', 
+        authorId: 4, 
+        title: "web3.0 fullstack developer1", 
+        likes: 234,
+        dislikes:2,
+        views:'200K views', 
+        days:'23 days ago'
+    },
+    {
+        id: 9, 
+        recommendTo:1, // who the video will be recommended to
+        key:'Javascript algorithm', 
+        labels:[],
+        url: 'watch', 
+        videoSrc: 'videos/20230529-210928.mp4', 
+        authorId: 5, 
+        title: "Javascript algorithm2", 
+        likes: 555,
+        dislikes:0,
+        views:'4K views', 
+        days:'5 days ago'
     }
 ]
 
@@ -321,6 +433,46 @@ export var comments = [
         likes:17,
         dislikes:1,
         commentedBy: undefined
-      }
+    },
+    {
+        id:6,
+        vedioId:2,
+        from: 19,
+        days: '3 days ago',
+        comment: 'This was amazing JanessaTech, the point on reciprocity was outstanding, really fantastic advice',
+        likes:17,
+        dislikes:1,
+        commentedBy: [7]
+    },
+    {
+        id:7,
+        vedioId:undefined,
+        from: 20,
+        days: '3 days ago',
+        comment: 'Thanks a lot',
+        likes:17,
+        dislikes:1,
+        commentedBy: [7]
+    },
+    {
+        id:8,
+        vedioId:3,
+        from: 17,
+        days: '2 days ago',
+        comment: 'Thanks a lot',
+        likes:17,
+        dislikes:1,
+        commentedBy: undefined
+    },
+    {
+        id:9,
+        vedioId:3,
+        from: 18,
+        days: '4 days ago',
+        comment: 'When I was younger, I used to trauma dump sensitive information onto people near me who honestly were absolute strangers because I didn\'t get this concept. Exploring this idea in therapy, as well as watching a couple of Brene Brown talks, helped me understand that I need to vet those who I disclose sensitive info to by first testing the waters, trying out slightly less sensitive info to see how they respond.',
+        likes:444,
+        dislikes:0,
+        commentedBy: undefined
+    }
   ]
 

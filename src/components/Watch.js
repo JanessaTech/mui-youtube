@@ -53,7 +53,7 @@ export default function Watch() {
           <FullMenu isHome={false} open={true} toggleMenu={toggleMenu} isInDrawer={true}></FullMenu>
         </YoutubeDrawer>
         <Box sx={{width:1, mb:3, marginTop:`${headerHeight}px`, display:'flex', justifyContent:'space-between'}}>
-            <Box sx={{width:{xs:1, sm:1, md:1, lg:0.7, xl:0.7}}}>
+            <Box sx={{width:{xs:1, sm:1, md:1, lg:0.6, xl:0.6}}}>
               <VideoInPlay vid={vid}/>
               <RecommendIn/>
               <Comments vid={vid}/>

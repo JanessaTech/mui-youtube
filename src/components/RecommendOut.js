@@ -1,11 +1,23 @@
 import { Box } from '@mui/material'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useTheme } from '@mui/material/styles'
+import {GetRecommendedVideos} from '../data/MockRestfuls'
+import VideoLayout from './VideoLayout';
+import YoutubeTabs from './YoutubeTabs';
 
 export default function RecommendOut() {
     const theme = useTheme();
+    const [videos, setVideos] = React.useState([])
+    useEffect(() => {
+      // mock the functionalities of restful calling to get default recommended videos
+      setVideos(GetRecommendedVideos(parseInt(localStorage.getItem('user')), undefined))
+    }, [])
+
   return (
-    <Box sx={{width:0.28, height:700, backgroundColor:'blue', [theme.breakpoints.down('lg')]:{display:'none'}}}></Box>
+    <Box sx={{width:0.38, [theme.breakpoints.down('lg')]:{display:'none'}}}>
+      <YoutubeTabs curTab={'All'}/>
+      <VideoLayout videos={videos} sideline={true}/>
+    </Box>
   )
 }
 

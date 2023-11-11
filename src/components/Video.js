@@ -5,7 +5,7 @@ import { YoutubeMenuItem } from '../customization/YoutubeStyling';
 import { YoutubeIcon } from '../customization/Svgs';
 
 
-export default function Video({id, url, videoSrc, author, img_profile, title, views, days}) {
+export default function Video({id, url, videoSrc, author, img_profile, title, views, days, sideline}) {
     const [state, setState] = React.useState({
         anchorMoreMenu: null,
     })
@@ -28,26 +28,29 @@ export default function Video({id, url, videoSrc, author, img_profile, title, vi
 
   return (
     <Card sx={{width:1, backgroundColor:'inherit', pb:{xs:3, sm:0}}} elevation={0}>
-        <Link href={`${url}?vid=${id}`}>
-            <CardMedia 
-                    sx={{borderRadius:3}}
-                    component='video' 
-                    src={videoSrc} 
-                    controls muted 
-                    onMouseOver={autoPlayVideo} onMouseOut={pauseVideo}
-            />
-        </Link>
+        <Box sx={{display: sideline ? 'flex': 'block'}}>
+            <Link href={`${url}?vid=${id}`}>
+                <CardMedia 
+                        sx={{borderRadius:3, width:sideline ? 250 : null}}
+                        component='video' 
+                        src={videoSrc} 
+                        controls muted 
+                        onMouseOver={autoPlayVideo} onMouseOut={pauseVideo}
+                />
+            </Link>
             <Box sx={{mt:1, display:'flex', justifyContent: 'space-between', '&:hover .MuiSvgIcon-root':{color:'black', visibility:'visible'}}}>
                 
                 <Box sx={{display:'flex'}}>
-                    <Box>
+                    <Box sx={{display: sideline?'none':'block'}}>
                         <IconButton sx={{mr:1, p:0}} href='me'>
                             <Avatar alt={author} src={img_profile}/>
                         </IconButton>
                     </Box>
-                    <Box>
+                    <Box sx={{ml:1}}>
                         <Link href={`${url}?vid=${id}`}>
-                            <Typography variant="h6">{title}</Typography>
+                            <Box>
+                                <Typography variant="h6">{title}</Typography>
+                            </Box>
                             <Tooltip title={author} placement="top-start" >
                                 <Typography color="text.secondary">{author}</Typography>
                             </Tooltip>
@@ -66,6 +69,8 @@ export default function Video({id, url, videoSrc, author, img_profile, title, vi
                     </IconButton>
                 </Box>
             </Box>
+        </Box>
+            
         
         <Menu
             id={`more-menu-${id}`}
