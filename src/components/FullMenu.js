@@ -5,11 +5,7 @@ import {fullDrawerWidth, headerHeight} from '../common/Constants'
 import {YoutubeMenuList} from '../customization/YoutubeStyling'
 import {YoutubeIcon} from '../customization/Svgs'
 import {GetYoutuberInfo, GetSubscriptions} from '../data/MockRestfuls'
-
-function capitalize(s)
-{
-    return s[0].toUpperCase() + s.slice(1);
-}
+import {capitalize} from '../common/Utils'
 
 export default function FullMenu({isHome, open,toggleMenu, isInDrawer}) {
   const meId = parseInt(localStorage.getItem('user'))

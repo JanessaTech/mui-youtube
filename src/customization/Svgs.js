@@ -5,6 +5,7 @@ const svgMapping = new Map([
   ['home', 'imgs/home-fill.svg'],
   ['shorts', 'imgs/shorts.svg'],
   ['subscriptions', 'imgs/reg.svg'],
+  ['register', 'imgs/reg.svg'],
   ['library', 'imgs/library-books.svg'],
   ['history', 'imgs/his.svg'],
   ['your videos', 'imgs/video.svg'],
