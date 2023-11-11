@@ -10,7 +10,7 @@ export default function YoutubeTabs({curTab}) {
     <Box sx={{display:{xs:'none', sm:'block'}}}>
       {
         me.tabs.map((tab, index) => (
-          <Chip key={tab} sx={{fontSize:'1.2em', mr:2, fontWeight:'bold'}}
+          <Chip key={tab} sx={{fontSize:'1.2em', mr:2, mb:1, fontWeight:'bold'}}
             label={tab}
             component="a"
             href="#"
