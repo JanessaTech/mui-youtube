@@ -15,7 +15,7 @@ export var videos = [
         id: 0, 
         recommendTo:1, // who the video will be recommended to
         key:'Javascript algorithm', 
-        labels:[],
+        labels:['web3.0', 'zz'],
         url: 'watch', 
         videoSrc: 'videos/20230529-210928.mp4', 
         authorId: 2, 
@@ -29,7 +29,7 @@ export var videos = [
         id: 2, 
         recommendTo:1, // who the video will be recommended to
         key:'tailwind css tutorial', 
-        labels:[],
+        labels:['ethereum'],
         url: 'watch', 
         videoSrc: 'videos/20230529-210928.mp4', 
         authorId: 2, 
@@ -57,7 +57,7 @@ export var videos = [
         id: 4, 
         recommendTo:1, // who the video will be recommended to
         key:'defi dapp', 
-        labels:[],
+        labels:['security', 'blockchain'],
         url: 'watch', 
         videoSrc: 'videos/20230529-210928.mp4', 
         authorId: 2, 
@@ -71,7 +71,7 @@ export var videos = [
         id: 5, 
         recommendTo:1, // who the video will be recommended to
         key:'React js tips and tricks', 
-        labels:[],
+        labels:['blockchain'],
         url: 'watch', 
         videoSrc: 'videos/20230529-210928.mp4', 
         authorId: 3, 
@@ -85,7 +85,7 @@ export var videos = [
         id: 6, 
         recommendTo:1, // who the video will be recommended to
         key:'React js tips and tricks', 
-        labels:[],
+        labels:['evm'],
         url: 'watch', 
         videoSrc: 'videos/20230529-210928.mp4', 
         authorId: 3, 
@@ -113,7 +113,7 @@ export var videos = [
         id: 8, 
         recommendTo:1, // who the video will be recommended to
         key:'web3.0 fullstack developer', 
-        labels:[],
+        labels:['zz'],
         url: 'watch', 
         videoSrc: 'videos/20230529-210928.mp4', 
         authorId: 4, 
@@ -473,6 +473,67 @@ export var comments = [
         likes:444,
         dislikes:0,
         commentedBy: undefined
+    },
+    {
+        id:10,
+        vedioId:4,
+        from: 18,
+        days: '1 days ago',
+        comment: 'You missed a couple things: 1) Chinese women have become more selective and less interested in marriage. 2) Chinese women also hold most of the debt in their country. 3) Chinese parents mostly depend on their children as their retirement plan and a good marriage ensures a good retirement.',
+        likes:23,
+        dislikes:0,
+        commentedBy: undefined
+    },
+    {
+        id:11,
+        vedioId:5,
+        from: 20,
+        days: '10 days ago',
+        comment: 'So true.  Thanks, Jannesa Tech!!',
+        likes:23,
+        dislikes:0,
+        commentedBy: undefined
+    },
+    {
+        id:12,
+        vedioId:6,
+        from: 18,
+        days: '1 days ago',
+        comment: 'Uma vida é pouco para agradecer o caminho do conhecimento, que você abriu para mim. Abs,',
+        likes:3333,
+        dislikes:0,
+        commentedBy: undefined
+    },
+    {
+        id:13,
+        vedioId:7,
+        from: 18,
+        days: '12 days ago',
+        comment: 'Uma vida é pouco para agradecer o caminho do conhecimento, que você abriu para mim. Abs,',
+        likes:3333,
+        dislikes:0,
+        commentedBy: undefined
+    },
+    {
+        id:14,
+        vedioId:8,
+        from: 19,
+        days: '6 days ago',
+        comment: 'You\'re of the things I will celebrate this year Mr. Conor Thanks for this amazing video',
+        likes:3333,
+        dislikes:0,
+        commentedBy: undefined
+    },
+    {
+        id:15,
+        vedioId:9,
+        from: 20,
+        days: '2 days ago',
+        comment: 'Uff,you never cease to amaze me with your remarkable presentation. Hands down the best content creator ever',
+        likes:3333,
+        dislikes:0,
+        commentedBy: undefined
     }
+
   ]
 

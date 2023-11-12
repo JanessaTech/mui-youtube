@@ -28,7 +28,10 @@ export default function Home() {
   useEffect(() => {
     // mock the functionalities of restful calling to fetch video by search_query
     const search = searchParams.get('search_query')
-    setVideos(GetRecommendedVideos(parseInt(localStorage.getItem('user')), search))
+    const tab = searchParams.get('tab_query')
+    console.log('search:', search)
+    console.log('tab:', tab)
+    setVideos(GetRecommendedVideos(parseInt(localStorage.getItem('user')), search, tab))
   }, [searchParams])
 
   useEffect(() => {

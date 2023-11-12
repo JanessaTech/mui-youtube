@@ -1,11 +1,18 @@
-import { Avatar, Box, Card, CardMedia, Divider, IconButton, Link, ListItemIcon, ListItemText, Menu, Tooltip, Typography } from '@mui/material'
+import { Avatar, Box, Card, CardMedia, Chip, Divider, IconButton, Link, ListItemIcon, ListItemText, Menu, Tooltip, Typography } from '@mui/material'
 import React from 'react'
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { YoutubeMenuItem } from '../customization/YoutubeStyling';
 import { YoutubeIcon } from '../customization/Svgs';
+import {  styled } from '@mui/material/styles';
+
+const VideoTab = styled((props) => {
+    const {label, ...others} = props
+    return (<Chip sx={{mr:0.5, mb:0.5}} label={label} color="success" size="small"/>)
+})({})
 
 
-export default function Video({id, url, videoSrc, author, img_profile, title, views, days, sideline}) {
+
+export default function Video({id, labels, url, videoSrc, author, img_profile, title, views, days, sideline}) {
     const [state, setState] = React.useState({
         anchorMoreMenu: null,
     })
@@ -50,6 +57,12 @@ export default function Video({id, url, videoSrc, author, img_profile, title, vi
                         <Link href={`${url}?vid=${id}`}>
                             <Box>
                                 <Typography variant="h6">{title}</Typography>
+                            </Box>
+                            <Box>
+                                {
+                                    labels && labels.map((l) => (<VideoTab label={l} />))
+                                }
+                                
                             </Box>
                             <Tooltip title={author} placement="top-start" >
                                 <Typography color="text.secondary">{author}</Typography>

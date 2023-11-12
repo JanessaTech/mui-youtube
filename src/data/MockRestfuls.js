@@ -2,8 +2,9 @@
 import {videos, youtubers, comments} from './MockData'
 
 
-export function GetRecommendedVideos(userId, search) {
+export function GetRecommendedVideos(userId, search, tab) {
     var filteredVideos = videos.filter((v) => {return v.recommendTo === userId}).filter((v) => {return !!search ? v.key === search : true})
+    .filter((v) => {return (v.labels && !!tab && tab.toLowerCase() !== 'all') ? v.labels.map(e => e.toLowerCase()).includes(tab.toLowerCase()): true})
 
     const res = []
     filteredVideos.forEach((v) => {
@@ -97,7 +98,7 @@ export function Unsubscribe(subject, subscriber) {
  * @param {*} content - The content of the comment
  */
 export function SubmitComment(vId, parentId, from, content) {
-    console.log('SubmitComment, vId=', vId)
+    console.log('SubmitComment, vId=', vId, 'parentId=', parentId, 'from=', from, 'content=', content)
     if (vId !== undefined) {
         const comment = {
             id: comments.length + 1,
