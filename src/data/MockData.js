@@ -1,14 +1,3 @@
-export var mockVideos = [
-    {id: 0, profileId: 1, key:'Javascript algorithm', url: 'watch', videoSrc: 'videos/20230529-210928.mp4', author: 'Janessa Tech', img_profile: 'imgs/prof.png', title: "Javascript algorithm", views:'1.5K views', days:'5 days ago'},
-    {id: 1, profileId: 1, key:'Javascript algorithm', url: 'watch', videoSrc: 'videos/20230529-210928.mp4', author: 'Janessa Tech', img_profile: 'imgs/prof.png', title: "Javascript algorithm", views:'1.5K views', days:'5 days ago'},
-    {id: 2, profileId: 1, key:'tailwind css tutorial', url: 'watch', videoSrc: 'videos/20230529-210928.mp4', author: 'Janessa Tech', img_profile: 'imgs/prof.png', title: "tailwind css tutorial", views:'1.5K views', days:'5 days ago'},
-    {id: 3, profileId: 1, key:'defi dapp', url: 'watch', videoSrc: 'videos/20230529-210928.mp4', author: 'Janessa Tech', img_profile: 'imgs/prof.png', title: "defi dapp", views:'1.5K views', days:'5 days ago'},
-    {id: 4, profileId: 1, key:'defi dapp', url: 'watch', videoSrc: 'videos/20230529-210928.mp4', author: 'Janessa Tech', img_profile: 'imgs/prof.png', title: "defi dapp", views:'1.5K views', days:'5 days ago'},
-    {id: 5, profileId: 1, key:'defi dapp', url: 'watch', videoSrc: 'videos/20230529-210928.mp4', author: 'Janessa Tech', img_profile: 'imgs/prof.png', title: "defi dapp", views:'1.5K views', days:'5 days ago'},
-    {id: 6, profileId: 1, key:'React js tips and tricks', url: 'watch', videoSrc: 'videos/20230529-210928.mp4', author: 'Janessa Tech', img_profile: 'imgs/prof.png', title: "React js tips and tricks", views:'1.5K views', days:'5 days ago'},
-    {id: 7, profileId: 1, key:'web3.0 fullstack developer', url: 'watch', videoSrc: 'videos/20230529-210928.mp4', author: 'Janessa Tech', img_profile: 'imgs/prof.png', title: "web3.0 fullstack developer", views:'1.5K views', days:'5 days ago'},
-    {id: 8, profileId: 1, key:'web3.0 fullstack developer', url: 'watch', videoSrc: 'videos/20230529-210928.mp4', author: 'Janessa Tech', img_profile: 'imgs/prof.png', title: "web3.0 fullstack developer", views:'1.5K views', days:'5 days ago'},
-]
 
 export var videos = [
     {
