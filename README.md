@@ -1,3 +1,8 @@
+# How does the project work like?
+
+![image info](./pictures/1.png)
+![image info](./pictures/2.png)
+
 # Install dependences
 
 ```
