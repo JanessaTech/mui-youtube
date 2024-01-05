@@ -9,6 +9,7 @@ import {GetYoutuberInfo} from '../data/MockRestfuls'
 export default function HeaderOthers() {
   const theme = useTheme();
   const meId = parseInt(localStorage.getItem('user'))
+  console.log('meId:', meId)
   const [me, setMe] = React.useState(GetYoutuberInfo(meId))
   return (
     <Box sx={{width:'fit-content', height:1, display:'flex', justifyContent:'flex-end', alignItems:'center'}}>

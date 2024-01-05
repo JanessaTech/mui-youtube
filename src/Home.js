@@ -13,6 +13,7 @@ import {GetRecommendedVideos} from './data/MockRestfuls'
 export default function Home() {
 
   const theme = useTheme();
+  localStorage.setItem('user', '1')  // hardcode logined user to mock a user with id has logined
   const isLargeScreen = useMediaQuery(theme.breakpoints.up("lg"));
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [isLargeMenu, setIsLargeMenu] = React.useState(isLargeScreen)
@@ -20,10 +21,6 @@ export default function Home() {
   const [drawerOpen, setDrawerOpen] = React.useState(false)
   const [videos, setVideos] = React.useState([])
   const [searchParams, setSearchParams] = useSearchParams();
-
-  useEffect(() => {
-    localStorage.setItem('user', '1')  // set default user id to skip login logic
-  }, [])
 
   useEffect(() => {
     // mock the functionalities of restful calling to fetch video by search_query
