@@ -84,8 +84,6 @@ export default function HeaderSearch({isLargeScreen}) {
               '& .MuiOutlinedInput-root':{
                     'fieldset' : {borderRadius:'50vh 0 0 50vh'},
                     '&.Mui-focused fieldset': {borderColor:'primary.main'},
-                    
-
                   },
               '& .MuiInputBase-adornedStart' :{pl: 2}
               }}
