@@ -64,8 +64,7 @@ export default function VideoIntro() {
             </Typography>
             <Typography paragraph variant='h6'>
              Contacts:
-            </Typography>
-            <Typography variant='body1'>
+             <Typography variant='body1'>
               <ul>
                 <li><strong>Gmail : </strong>  janessatech.web3@gmail.com</li>
                 <li><strong>Skype : </strong>  lvlajzhao1983@gmail.com</li>
@@ -73,6 +72,8 @@ export default function VideoIntro() {
                 <li><strong>Medium : </strong>  https://medium.com/@JanessaTech</li>
               </ul>
             </Typography>
+            </Typography>
+            
             
         <Button sx={{ 
             borderRadius:2, position:'absolute', 

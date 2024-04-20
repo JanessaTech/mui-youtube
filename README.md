@@ -5,6 +5,8 @@
 
 # About this project
 
+Check out https://www.youtube.com/watch?v=3p2KemIJi30 about how the projects
+
 - This project is to showcase how to use material-ui library. The following features in MUI are used:
   - ThemeProvider
   - createTheme
